@@ -35,94 +35,100 @@ $medyalar = $medya_stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $gorseller = array_filter($medyalar, function($m) { return $m['medya_tipi'] === 'gorsel'; });
 $videolar = array_filter($medyalar, function($m) { return in_array($m['medya_tipi'], ['video', 'video_url']); });
-
 require_once __DIR__ . '/includes/header.php';
 ?>
+            <style>
+                .property-breadcrumb { padding: 20px 0; font-size: 14px; color: #666; }
+                .property-breadcrumb a { color: #666; text-decoration: none; transition: color 0.2s; }
+                .property-breadcrumb a:hover { color: #4361ee; }
+                .property-breadcrumb span { margin: 0 10px; color: #ccc; }
+                
+                .header-property-custom { margin-bottom: 30px; }
+                .header-property-custom .title-area h2 { font-size: 32px; font-weight: 800; color: #1a1a1a; margin-bottom: 8px; }
+                .header-property-custom .location { color: #666; font-size: 16px; display: flex; align-items: center; gap: 8px; }
+                .header-property-custom .location i { color: #4361ee; }
+                .header-property-custom .location a { color: #666; text-decoration: underline; font-weight: 600; margin-left: 5px; }
+                
+                .price-area-custom { text-align: right; }
+                .price-area-custom .price { font-size: 36px; font-weight: 800; color: #1a1a1a; line-height: 1; }
+                .price-area-custom .price-sqft { color: #666; font-size: 16px; margin-top: 8px; font-weight: 500; }
 
-            <div class="flat-section-v4">
-                <div class="container">
-                    <div class="header-property-detail">
-                        <div class="content-top d-flex justify-content-between align-items-center">
-                            <h3 class="title link fw-8"><?php echo htmlspecialchars($ilan['baslik']); ?></h3>
-                            <div class="box-price d-flex align-items-end">
-                                <h3 class="fw-8"><?php echo number_format($ilan['fiyat'], 0, ',', '.'); ?> ₺</h3>
-                                <?php if($ilan['durumu'] == 'Kiralık'): ?>
-                                    <span class="body-1 text-variant-1">/aylık</span>
-                                <?php endif; ?>
+                .gallery-grid-v2 { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: 1fr 1fr; gap: 12px; height: 500px; margin-bottom: 40px; }
+                .gallery-grid-v2 .grid-item { position: relative; overflow: hidden; border-radius: 16px; }
+                .gallery-grid-v2 .grid-item img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s ease; }
+                .gallery-grid-v2 .grid-item:hover img { transform: scale(1.05); }
+                .gallery-grid-v2 .item-main { grid-column: 1 / 2; grid-row: 1 / 3; }
+                
+                .show-all-overlay { position: absolute; bottom: 20px; right: 20px; background: white; padding: 10px 20px; border-radius: 12px; font-weight: 700; color: #1a1a1a; display: flex; align-items: center; gap: 10px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border: 1px solid #eee; z-index: 10; text-decoration: none; font-size: 14px; }
+                .show-all-overlay:hover { background: #f8f9fa; }
+
+                @media (max-width: 991px) {
+                    .gallery-grid-v2 { grid-template-columns: 1fr 1fr; grid-template-rows: 250px 150px; height: auto; }
+                    .gallery-grid-v2 .item-main { grid-column: 1 / 3; grid-row: 1 / 2; }
+                    .price-area-custom { text-align: left; margin-top: 15px; }
+                }
+            </style>
+
+            <div class="container">
+                <div class="property-breadcrumb">
+                    <a href="index.php">Anasayfa</a> <span>/</span> 
+                    <a href="ilanlar.php">İlanlar</a> <span>/</span> 
+                    <a href="ilanlar.php?durum=<?php echo urlencode($ilan['durumu']); ?>"><?php echo htmlspecialchars($ilan['durumu']); ?></a> <span>/</span> 
+                    <a href="ilanlar.php?tip=<?php echo urlencode($ilan['emlak_tipi']); ?>"><?php echo htmlspecialchars($ilan['emlak_tipi']); ?></a> <span>/</span> 
+                    <b><?php echo htmlspecialchars($ilan['baslik']); ?></b>
+                </div>
+
+                <div class="header-property-custom">
+                    <div class="row align-items-end">
+                        <div class="col-lg-8">
+                            <div class="title-area">
+                                <h2><?php echo htmlspecialchars($ilan['baslik']); ?></h2>
+                                <div class="location">
+                                    <i class="fa-solid fa-location-dot"></i>
+                                    <?php echo htmlspecialchars($ilan['ilce'] . ', ' . $ilan['il'] . ', Türkiye'); ?>
+                                    <a href="#map-section">Haritada Gör</a>
+                                </div>
                             </div>
                         </div>
-                        <div class="content-bottom">
-                            <div class="box-left">
-                                <div class="info-box">
-                                    <div class="label">Özellikler</div>
-                                    <ul class="meta">
-                                        <li class="meta-item">
-                                            <i class="icon icon-bed"></i>
-                                            <span class="text-variant-1">Oda:</span>
-                                            <span class="fw-6"><?php echo htmlspecialchars($ilan['oda_sayisi']); ?></span>
-                                        </li>
-                                        <li class="meta-item">
-                                            <i class="icon icon-bath"></i>
-                                            <span class="text-variant-1">Banyo:</span>
-                                            <span class="fw-6"><?php echo htmlspecialchars($ilan['banyo_sayisi']); ?></span>
-                                        </li>
-                                        <li class="meta-item">
-                                            <i class="icon icon-sqft"></i>
-                                            <span class="text-variant-1">m²:</span>
-                                            <span class="fw-6"><?php echo htmlspecialchars($ilan['m2_brut']); ?></span>
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="info-box">
-                                    <div class="label">Konum</div>
-                                    <p class="meta-item">
-                                        <span class="icon icon-mapPin"></span>
-                                        <span class="text-variant-1"><?php echo htmlspecialchars($ilan['il'] . ' / ' . $ilan['ilce'] . ' / ' . $ilan['mahalle']); ?></span>
-                                    </p>
-                                </div>
+                        <div class="col-lg-4">
+                            <div class="price-area-custom">
+                                <div class="price"><?php echo number_format($ilan['fiyat'], 0, ',', '.'); ?> ₺</div>
+                                <?php if($ilan['m2_brut'] > 0): ?>
+                                    <div class="price-sqft"><?php echo number_format($ilan['fiyat'] / $ilan['m2_brut'], 0, ',', '.'); ?> ₺ / m²</div>
+                                <?php endif; ?>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
 
-            <section class="flat-gallery-single">
-                <?php 
-                $gorsel_listesi = array_values($gorseller);
-                for($i=0; $i<5; $i++): 
-                    $img = isset($gorsel_listesi[$i]) ? 'admin/uploads/images/' . $gorsel_listesi[$i]['dosya_yolu'] : 'images/banner/banner-property-5.jpg';
-                    $class = "item" . ($i+1) . " box-img";
-                ?>
-                    <?php if($i == 0): ?>
-                        <div class="<?php echo $class; ?>">
-                            <a href="<?php echo $img; ?>" class="d-block" data-fancybox="gallery">
-                                <img src="<?php echo $img; ?>" alt="img-gallery">
+                <section class="gallery-grid-v2">
+                    <?php 
+                    $gorsel_listesi = array_values($gorseller);
+                    for($i=0; $i<5; $i++): 
+                        $img = isset($gorsel_listesi[$i]) ? 'admin/uploads/images/' . $gorsel_listesi[$i]['dosya_yolu'] : 'https://placehold.co/800x600?text=Yakında+Gelecek';
+                        $class = $i == 0 ? "item-main" : "";
+                    ?>
+                        <div class="grid-item <?php echo $class; ?>">
+                            <a href="<?php echo $img; ?>" data-fancybox="gallery">
+                                <img src="<?php echo $img; ?>" alt="Property Image <?php echo $i+1; ?>">
                             </a>
-                            <div class="box-btn">
-                                <?php if(!empty($videolar)): 
-                                    $video = reset($videolar);
-                                    $vpath = $video['medya_tipi'] == 'video' ? 'admin/uploads/videos/' . $video['dosya_yolu'] : $video['dosya_yolu'];
-                                ?>
-                                <a href="<?php echo $vpath; ?>" data-fancybox="gallery2" class="box-icon">
-                                    <span class="icon">
-                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                            <path d="M13.125 8.75L17.0583 4.81667C17.1457 4.72937 17.2571 4.66993 17.3782 4.64586C17.4994 4.62179 17.625 4.63417 17.7391 4.68143C17.8532 4.72869 17.9508 4.80871 18.0195 4.91139C18.0882 5.01407 18.1249 5.1348 18.125 5.25833V14.7417C18.1249 14.8652 18.0882 14.9859 18.0195 15.0886C17.9508 15.1913 17.8532 15.2713 17.7391 15.3186C17.625 15.3658 17.4994 15.3782 17.3782 15.3541C17.2571 15.3301 17.1457 15.2706 17.0583 15.1833L13.125 11.25M3.75 15.625H11.25C11.7473 15.625 12.2242 15.4275 12.5758 15.0758C12.9275 14.7242 13.125 14.2473 13.125 13.75V6.25C13.125 5.75272 12.9275 5.27581 12.5758 4.92417C12.2242 4.57254 11.7473 4.375 11.25 4.375H3.75C3.25272 4.375 2.77581 4.57254 2.42417 4.92417C2.07254 5.27581 1.875 5.75272 1.875 6.25V13.75C1.875 14.2473 2.07254 14.7242 2.42417 15.0758C2.77581 15.4275 3.25272 15.625 3.75 15.625Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
-                                        </svg>
-                                    </span>
+                            <?php if($i == 4): ?>
+                                <a href="<?php echo $img; ?>" data-fancybox="gallery" class="show-all-overlay">
+                                    <i class="fa-solid fa-images"></i> Tüm Fotoğrafları Gör
                                 </a>
-                                <?php endif; ?>
-                                <a href="<?php echo $img; ?>" data-fancybox="gallery" class="tf-btn primary">
-                                    Fotoğrafları Gör
-                                </a>
-                            </div>
+                            <?php endif; ?>
                         </div>
-                    <?php else: ?>
-                        <a href="<?php echo $img; ?>" class="<?php echo $class; ?>" data-fancybox="gallery">
-                            <img src="<?php echo $img; ?>" alt="img-gallery">
-                        </a>
-                    <?php endif; ?>
-                <?php endfor; ?>
-            </section>
+                    <?php endfor; ?>
+                    
+                    <?php 
+                    // Geri kalan resimleri Fancybox galerisine gizli olarak ekle
+                    for($i=5; $i<count($gorsel_listesi); $i++): 
+                        $img = 'admin/uploads/images/' . $gorsel_listesi[$i]['dosya_yolu'];
+                    ?>
+                        <a href="<?php echo $img; ?>" data-fancybox="gallery" class="d-none"></a>
+                    <?php endfor; ?>
+                </section>
+            </div>
 
             <section class="flat-section-v3 flat-property-detail">
                 <div class="container">
