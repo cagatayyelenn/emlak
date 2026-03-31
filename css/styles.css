@@ -4145,8 +4145,8 @@ label {
 .nice-select .option:hover,
 .nice-select .option.focus,
 .nice-select .option.selected.focus {
-  background-color: #ffffff;
-  color: #e62236;
+  background-color: #e62236;
+  color: #ffffff;
 }
 
 .nice-select .option.selected {

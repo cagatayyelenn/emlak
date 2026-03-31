@@ -51,7 +51,7 @@ require_once __DIR__ . '/includes/header.php';
                                                             <div class="form-group-1 search-form form-style">
                                                                 <label>Tür</label>
                                                                 <div class="group-select">
-                                                                    <select name="tip" class="form-control" style="border:none; background:transparent;">
+                                                                    <select name="tip" class="select_js">
                                                                         <option value="">Tümü</option>
                                                                         <option value="Daire">Daire</option>
                                                                         <option value="Villa">Villa</option>

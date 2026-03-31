@@ -83,7 +83,7 @@ require_once __DIR__ . '/includes/header.php';
                                                                     </div>
                                                                 </div>
                                                                 <div class="form-style mb-3">
-                                                                    <select name="tip" class="form-control">
+                                                                    <select name="tip" class="select_js">
                                                                         <option value="">Emlak Tipi</option>
                                                                         <option value="Daire" <?php echo ($_GET['tip'] ?? '') == 'Daire' ? 'selected' : ''; ?>>Daire</option>
                                                                         <option value="Villa" <?php echo ($_GET['tip'] ?? '') == 'Villa' ? 'selected' : ''; ?>>Villa</option>
