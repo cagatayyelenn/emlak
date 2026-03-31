@@ -63,6 +63,14 @@ try {
         INDEX (portfoy_yoneticisi_id),
         FOREIGN KEY (portfoy_yoneticisi_id) REFERENCES portfoy_yoneticileri(id) ON DELETE SET NULL
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;");
+    
+    // Eksik sütunları (slug vb.) kontrol et ve ekle (Var olan tabloyu güncellemek için)
+    $check_slug = $db->query("SHOW COLUMNS FROM ilanlar LIKE 'slug'");
+    if (!$check_slug->fetch()) {
+        $db->exec("ALTER TABLE ilanlar ADD COLUMN slug VARCHAR(255) UNIQUE AFTER vitrin_gorseli");
+        echo "<span style='color:#e62236;'>ℹ <b>ilanlar</b> tablosuna <b>slug</b> sütunu eklendi.</span><br>";
+    }
+    
     echo "<span style='color:green;'>✔ <b>ilanlar</b> tablosu hazır.</span><br>";
 
     // 3. İlan Medyaları Tablosu
