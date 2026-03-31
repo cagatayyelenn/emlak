@@ -1,0 +1,7 @@
+.DS_Store
+admin/includes/database.php
+admin/uploads/*
+!admin/uploads/.gitkeep
+node_modules/
+.env
+.vscode/
