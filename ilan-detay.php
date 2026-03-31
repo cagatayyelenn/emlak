@@ -1,5 +1,7 @@
 <?php
 // ilan-detay.php
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 require_once __DIR__ . '/includes/db.php';
 
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
@@ -15,7 +17,7 @@ $where = $slug ? "i.slug = ?" : "i.id = ?";
 $param = $slug ? $slug : $id;
 
 $stmt = $db->prepare("
-    SELECT i.*, y.ad_soyad as yonetici_ad, y.telefon as yonetici_tel, y.email as yonetici_email, y.gorsel as yonetici_gorsel
+    SELECT i.*, y.ad_soyad as yonetici_ad, y.telefon as yonetici_tel, y.eposta as yonetici_email, y.profil_resmi as yonetici_gorsel
     FROM ilanlar i 
     LEFT JOIN portfoy_yoneticileri y ON i.portfoy_yoneticisi_id = y.id 
     WHERE $where
