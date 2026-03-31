@@ -1,0 +1,8 @@
+# Veritabanı dosyası (Canlı sunucudaki ezilmemeli)
+database.sqlite
+
+# Yüklenen görseller ve videolar (Sunucudaki yüklemeler ezilmemeli)
+uploads/
+
+# macOS sistem dosyaları
+.DS_Store
