@@ -3,7 +3,7 @@ require_once 'includes/database.php';
 require_once 'includes/auth.php';
 
 // Tüm adminleri çek
-$adminler = $db->query("SELECT * FROM admins ORDER BY id DESC text-end")->fetchAll();
+$adminler = $db->query("SELECT * FROM admins ORDER BY id DESC")->fetchAll();
 
 require_once 'includes/header.php';
 ?>
