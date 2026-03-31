@@ -187,7 +187,7 @@ require_once 'includes/header.php';
                             <input type="date" class="form-control" name="ilan_tarihi" value="<?= htmlspecialchars($ilan['ilan_tarihi'] ?? date('Y-m-d')) ?>">
                         </div>
                         <div class="col-md-4 mb-3">
-                            <label class="form-label fw-bold text-secondary small">Portföy Yöneticisi</label>
+                            <label class="form-label fw-bold text-secondary small">Gayrimenkul Danışmanı</label>
                             <select class="form-select" name="portfoy_yoneticisi_id">
                                 <option value="">-- Seçin --</option>
                                 <?php foreach($yoneticiler as $y): ?>

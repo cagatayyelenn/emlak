@@ -99,7 +99,7 @@ try {
                         <th class="py-3">İlan Bilgileri</th>
                         <th class="py-3">Konum</th>
                         <th class="py-3">Fiyat</th>
-                        <th class="py-3">Yönetici / Durum</th>
+                        <th class="border-0 text-secondary small fw-bold">DANIŞMAN</th>
                         <th class="py-3 pe-4 text-end">İşlemler</th>
                     </tr>
                 </thead>

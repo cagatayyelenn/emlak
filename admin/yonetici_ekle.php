@@ -36,25 +36,21 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 require_once 'includes/header.php';
 ?>
 
-<div class="row justify-content-center">
-    <div class="col-md-6">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h4 class="fw-bold m-0 text-dark">Yeni Yönetici Ekle</h4>
-            <a href="yoneticiler.php" class="btn btn-outline-secondary btn-sm fw-bold"><i class="fa-solid fa-arrow-left me-1"></i> Geri Dön</a>
-        </div>
+<div class="row align-items-center mb-4">
+    <div class="col-md-12">
+        <h4 class="mb-1 text-dark fw-bold">Yeni Danışman Ekle</h4>
+        <p class="text-muted small">Portföylerinizle ilgilenecek yeni bir gayrimenkul danışmanı tanımlayın.</p>
+    </div>
+</div>
 
-        <div class="card shadow-sm border-0 rounded-0">
-            <div class="card-body p-4">
-                <form action="yonetici_ekle.php" method="POST" enctype="multipart/form-data">
-                    <div class="mb-4 text-center">
-                        <label for="resimInput" class="form-label d-block fw-bold text-secondary small mb-3">Profil Resmi</label>
-                        <div class="position-relative d-inline-block">
-                            <img id="avatarPreview" src="https://ui-avatars.com/api/?name=Admin&background=f4f7fa&color=4361ee" class="rounded-circle border shadow-sm" style="width:120px; height:120px; object-fit:cover;">
-                            <label for="resimInput" class="btn btn-primary btn-sm rounded-circle position-absolute bottom-0 end-0 shadow" style="width:35px; height:35px;"><i class="fa-solid fa-camera" style="margin-top:5px;"></i></label>
-                            <input type="file" class="d-none" id="resimInput" name="profil_resmi" accept="image/*" onchange="previewImage(this)">
-                        </div>
-                    </div>
-
+<form action="yonetici_ekle.php" method="POST" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-header bg-white py-3">
+                    <h6 class="mb-0 fw-bold text-primary"><i class="fa-solid fa-user-plus me-2"></i> Danışman Bilgileri</h6>
+                </div>
+                <div class="card-body p-4">
                     <div class="mb-3">
                         <label for="ad_soyad" class="form-label fw-bold text-secondary small">Ad Soyad <span class="text-danger">*</span></label>
                         <input type="text" class="form-control form-control-lg" id="ad_soyad" name="ad_soyad" placeholder="Örn: Ahmet Yılmaz" required>
@@ -69,14 +65,29 @@ require_once 'includes/header.php';
                             <input type="email" class="form-control" id="eposta" name="eposta" placeholder="örnek@mail.com">
                         </div>
                     </div>
-                    <div class="d-grid mt-4">
-                        <button type="submit" class="btn btn-primary btn-lg fw-bold shadow-sm"><i class="fa-solid fa-save me-2"></i> Yöneticiyi Kaydet</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-4">
+            <div class="card shadow-sm border-0">
+                <div class="card-header bg-white py-3">
+                    <h6 class="mb-0 fw-bold text-dark"><i class="fa-solid fa-image me-2"></i> Profil Resmi</h6>
+                </div>
+                <div class="card-body p-4 text-center">
+                    <div class="mb-3 p-3 bg-light rounded border d-flex align-items-center justify-content-center" style="min-height:150px;">
+                        <span class="text-muted small italic">Resim seçilmedi</span>
                     </div>
-                </form>
+                    <input type="file" class="form-control form-control-sm" name="profil_resmi" accept="image/*">
+                    <p class="text-muted mt-2 small">En iyi görünüm için kare resim kullanın.</p>
+                </div>
+            </div>
+            
+            <div class="d-grid shadow-sm mt-4">
+                <button type="submit" class="btn btn-primary btn-lg fw-bold"><i class="fa-solid fa-save me-2"></i> Danışmanı Kaydet</button>
             </div>
         </div>
     </div>
-</div>
+</form>
 
 <script>
 function previewImage(input) {

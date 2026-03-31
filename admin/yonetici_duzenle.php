@@ -56,18 +56,25 @@ if (!$yonetici) {
 require_once 'includes/header.php';
 ?>
 
-<div class="row justify-content-center">
+<div class="row align-items-center mb-4">
     <div class="col-md-6">
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <h4 class="fw-bold m-0 text-dark">Yöneticiyi Düzenle</h4>
-            <a href="yoneticiler.php" class="btn btn-outline-secondary btn-sm fw-bold"><i class="fa-solid fa-arrow-left me-1"></i> Geri Dön</a>
-        </div>
+        <h4 class="mb-1 text-dark fw-bold">Danışman Düzenle</h4>
+        <p class="text-muted small"><?= htmlspecialchars($yonetici['ad_soyad'] ?? '') ?> bilgilerini güncelleyin.</p>
+    </div>
+    <div class="col-md-6 text-md-end">
+        <a href="yoneticiler.php" class="btn btn-outline-secondary btn-sm fw-bold"><i class="fa-solid fa-arrow-left me-1"></i> Geri Dön</a>
+    </div>
+</div>
 
-        <div class="card shadow-sm border-0 rounded-0">
-            <div class="card-body p-4">
-                <form action="yonetici_duzenle.php?id=<?= $id ?>" method="POST" enctype="multipart/form-data">
-                    <input type="hidden" name="current_profil_resmi" value="<?= $yonetici['profil_resmi'] ?>">
-                    
+<form action="yonetici_duzenle.php?id=<?= $id ?>" method="POST" enctype="multipart/form-data">
+    <input type="hidden" name="current_profil_resmi" value="<?= $yonetici['profil_resmi'] ?>">
+    <div class="row">
+        <div class="col-lg-8">
+            <div class="card shadow-sm border-0 mb-4">
+                <div class="card-header bg-white py-3">
+                    <h6 class="mb-0 fw-bold text-primary"><i class="fa-solid fa-user-edit me-2"></i> Danışman Bilgileri</h6>
+                </div>
+                <div class="card-body p-4">
                     <div class="mb-4 text-center">
                         <label class="form-label d-block fw-bold text-secondary small mb-3">Profil Resmi</label>
                         <div class="position-relative d-inline-block">
@@ -83,8 +90,8 @@ require_once 'includes/header.php';
                     </div>
 
                     <div class="mb-3">
-                        <label for="ad_soyad" class="form-label fw-bold text-secondary small">Ad Soyad <span class="text-danger">*</span></label>
-                        <input type="text" class="form-control form-control-lg" id="ad_soyad" name="ad_soyad" value="<?= htmlspecialchars($yonetici['ad_soyad']) ?>" required>
+                        <label class="form-label fw-bold text-secondary small">Ad Soyad</label>
+                        <input type="text" class="form-control" name="ad_soyad" value="<?= htmlspecialchars($yonetici['ad_soyad'] ?? '') ?>" required>
                     </div>
                     <div class="row">
                         <div class="col-md-6 mb-3">
@@ -96,14 +103,20 @@ require_once 'includes/header.php';
                             <input type="email" class="form-control" id="eposta" name="eposta" value="<?= htmlspecialchars($yonetici['eposta']) ?>">
                         </div>
                     </div>
-                    <div class="d-grid mt-4">
-                        <button type="submit" class="btn btn-warning btn-lg fw-bold shadow-sm text-white"><i class="fa-solid fa-save me-2"></i> Bilgileri Güncelle</button>
+                    <div class="d-grid shadow-sm mt-4">
+                        <button type="submit" class="btn btn-primary btn-lg fw-bold"><i class="fa-solid fa-save me-2"></i> Değişiklikleri Kaydet</button>
                     </div>
-                </form>
+                    
+                    <div class="d-grid mt-2">
+                        <a href="yonetici_sil.php?id=<?= $id ?>" class="btn btn-outline-danger btn-sm" onclick="return confirm('Bu danışmanı silmek istediğinize emin misiniz? Bu işlem danışmana bağlı ilanları sahipsiz bırakacaktır.')">
+                            <i class="fa-solid fa-trash me-2"></i> Danışmanı Sil
+                        </a>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-</div>
+</form>
 
 <script>
 function previewImage(input) {

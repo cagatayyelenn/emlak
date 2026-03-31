@@ -6,9 +6,16 @@ require_once 'includes/header.php';
 $yoneticiler = $db->query("SELECT * FROM portfoy_yoneticileri ORDER BY id DESC")->fetchAll();
 ?>
 
-<div class="d-flex justify-content-between align-items-center mb-4">
-    <h2>Portföy Yöneticileri</h2>
-    <a href="yonetici_ekle.php" class="btn btn-primary"><i class="fa-solid fa-plus me-1"></i> Yeni Yönetici Ekle</a>
+<div class="row align-items-center mb-4">
+    <div class="col-md-6">
+        <h4 class="mb-1 text-dark fw-bold">Danışman Listesi</h4>
+        <p class="text-muted small">Tüm gayrimenkul danışmanlarını buradan yönetebilirsiniz.</p>
+    </div>
+    <div class="col-md-6 text-md-end">
+        <a href="yonetici_ekle.php" class="btn btn-primary fw-bold shadow-sm rounded-pill px-4">
+            <i class="fa-solid fa-plus me-2"></i> Yeni Danışman Ekle
+        </a>
+    </div>
 </div>
 
 <div class="card shadow-sm border-0">
@@ -24,11 +31,11 @@ $yoneticiler = $db->query("SELECT * FROM portfoy_yoneticileri ORDER BY id DESC")
             <table class="table table-hover align-middle">
                 <thead class="table-light">
                     <tr>
-                        <th style="width: 80px;">Profil</th>
-                        <th>Ad Soyad</th>
-                        <th>Telefon</th>
-                        <th>E-Posta</th>
-                        <th class="text-end">İşlemler</th>
+                        <th class="border-0 text-secondary small fw-bold">DANIŞMAN BİLGİLERİ</th>
+                        <th class="border-0 text-secondary small fw-bold">İLETİŞİM</th>
+                        <th class="border-0 text-secondary small fw-bold">E-POSTA</th>
+                        <th class="border-0 text-secondary small fw-bold">KAYIT TARİHİ</th>
+                        <th class="border-0 text-secondary small fw-bold text-end">İŞLEMLER</th>
                     </tr>
                 </thead>
                 <tbody>

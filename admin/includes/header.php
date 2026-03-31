@@ -65,14 +65,14 @@ try {
             
             <hr class="text-secondary opacity-25 my-3 mx-4">
             
-            <div class="px-4 mb-2 small text-muted fw-bold" style="font-size:0.80rem;">PORTFÖY</div>
+            <div class="px-4 mb-2 small text-muted fw-bold" style="font-size:0.80rem;">DANIŞMANLAR</div>
             <a href="yoneticiler.php" class="list-group-item list-group-item-action border-0 d-flex align-items-center px-4">
                 <i class="fa-solid fa-users me-3 fs-5" style="color:#6c757d; width:25px; text-align:center;"></i>
-                <span class="fw-semibold">Portföy listesi</span>
+                <span class="fw-semibold">Danışman listesi</span>
             </a>
             <a href="yonetici_ekle.php" class="list-group-item list-group-item-action border-0 d-flex align-items-center px-4">
                 <i class="fa-solid fa-user-plus me-3 fs-5" style="color:#6c757d; width:25px; text-align:center;"></i>
-                <span class="fw-semibold">Portföy ekle</span>
+                <span class="fw-semibold">Danışman ekle</span>
             </a>
 
             <hr class="text-secondary opacity-25 my-3 mx-4">
@@ -89,6 +89,10 @@ try {
             <a href="ayarlar.php" class="list-group-item list-group-item-action border-0 d-flex align-items-center px-4">
                 <i class="fa-solid fa-gear me-3 fs-5" style="color:#6c757d; width:25px; text-align:center;"></i>
                 <span class="fw-semibold">Site Ayarları</span>
+            </a>
+            <a href="adminler.php" class="list-group-item list-group-item-action border-0 d-flex align-items-center px-4">
+                <i class="fa-solid fa-user-shield me-3 fs-5" style="color:#6c757d; width:25px; text-align:center;"></i>
+                <span class="fw-semibold">Yöneticiler</span>
             </a>
         </div>
     </div>

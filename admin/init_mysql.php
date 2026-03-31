@@ -96,9 +96,19 @@ try {
     // 4. Adminler Tablosu
     $db->exec("CREATE TABLE IF NOT EXISTS admins (
         id INT AUTO_INCREMENT PRIMARY KEY,
-        username VARCHAR(100) NOT NULL UNIQUE,
-        password VARCHAR(255) NOT NULL
+        username VARCHAR(50) NOT NULL UNIQUE,
+        password VARCHAR(255) NOT NULL,
+        ad_soyad VARCHAR(100),
+        olusturma_tarihi TIMESTAMP DEFAULT CURRENT_TIMESTAMP
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;");
+
+    // admins tablosu için sütun kontrolü
+    $check_admin_name = $db->query("SHOW COLUMNS FROM admins LIKE 'ad_soyad'");
+    if (!$check_admin_name->fetch()) {
+        $db->exec("ALTER TABLE admins ADD COLUMN ad_soyad VARCHAR(100) AFTER password");
+        $db->exec("UPDATE admins SET ad_soyad = 'Sistem Yöneticisi' WHERE username = 'admin'");
+        echo "<span style='color:#e62236;'>ℹ <b>admins</b> tablosuna <b>ad_soyad</b> sütunu eklendi.</span><br>";
+    }
     echo "<span style='color:green;'>✔ <b>admins</b> tablosu hazır.</span><br>";
 
     // 5. Sayfalar Tablosu (Hakkımızda, İletişim vb.)
@@ -184,8 +194,8 @@ try {
     $stmt->execute();
     if (!$stmt->fetch()) {
         $hash = password_hash("123456", PASSWORD_DEFAULT);
-        $insert = $db->prepare("INSERT INTO admins (username, password) VALUES (?, ?)");
-        $insert->execute(["admin", $hash]);
+        $insert = $db->prepare("INSERT INTO admins (username, password, ad_soyad) VALUES (?, ?, ?)");
+        $insert->execute(["admin", $hash, "Sistem Yöneticisi"]);
         echo "<span style='color:#e62236;'>ℹ Varsayılan yönetici kullanıcı (admin/123456) oluşturuldu.</span><br>";
     }
 

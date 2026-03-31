@@ -200,7 +200,7 @@ require_once 'includes/header.php';
                                 </select>
                             </div>
                             <div class="col-md-4 mb-4">
-                                <label class="form-label fw-bold text-secondary small">Portföy Yöneticisi</label>
+                                <label class="form-label fw-bold text-secondary small">Gayrimenkul Danışmanı</label>
                                 <select class="form-select" name="portfoy_yoneticisi_id">
                                     <option value="">-- Atanmadı --</option>
                                     <?php foreach($yoneticiler as $y): ?>
