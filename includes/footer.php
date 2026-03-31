@@ -7,7 +7,9 @@
                         <div class="content-footer-top">
                             <div class="footer-logo">
                                 <a href="index.php">
-                                    <?php if(!empty($site_set['logo'])): ?>
+                                    <?php if(!empty($site_set['logo_beyaz'])): ?>
+                                        <img src="admin/uploads/settings/<?php echo $site_set['logo_beyaz']; ?>" alt="logo-footer" width="166" height="48">
+                                    <?php elseif(!empty($site_set['logo'])): ?>
                                         <img src="admin/uploads/settings/<?php echo $site_set['logo']; ?>" alt="logo-footer" width="166" height="48">
                                     <?php else: ?>
                                         <img src="images/logo/logo@2x.png" alt="logo-footer" width="166" height="48">
@@ -81,15 +83,15 @@
                                     <ul class="mt-10">
                                         <li class="mt-12 d-flex align-items-center gap-8">
                                             <i class="icon icon-mapPin"></i>
-                                            <p class="text-variant-2">Ressam Vecihi Bereketoğlu Sok. Fardan Apt. No:7 Caddebostan Kadıköy İstanbul</p>
+                                            <p class="text-variant-2"><?php echo htmlspecialchars($site_set['iletisim_adres'] ?? ''); ?></p>
                                         </li>
                                         <li class="mt-12 d-flex align-items-center gap-8">
                                             <i class="icon icon-phone2"></i>
-                                            <p class="text-variant-2">+90532 063 34 17</p>
+                                            <p class="text-variant-2"><?php echo htmlspecialchars($site_set['iletisim_telefon'] ?? ''); ?></p>
                                         </li>
                                         <li class="mt-12 d-flex align-items-center gap-8">
                                             <i class="icon icon-mail"></i>
-                                            <p class="text-variant-2">info@maxwellemlak.com</p>
+                                            <p class="text-variant-2"><?php echo htmlspecialchars($site_set['iletisim_eposta'] ?? ''); ?></p>
                                         </li>
                                     </ul>
                                 </div>

@@ -34,6 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $sahibinden_url = $_POST['sahibinden_url'] ?? '';
 
         $logo = $ayarlar['logo'] ?? '';
+        $logo_beyaz = $ayarlar['logo_beyaz'] ?? '';
         $favicon = $ayarlar['favicon'] ?? '';
 
         // Logo Yükleme
@@ -45,6 +46,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     @unlink($settings_dir . '/' . $logo);
                 }
                 $logo = $new_logo_name;
+            }
+        }
+
+        // Beyaz Logo Yükleme
+        if (isset($_FILES['logo_beyaz']) && $_FILES['logo_beyaz']['error'] === UPLOAD_ERR_OK) {
+            $ext = pathinfo($_FILES['logo_beyaz']['name'], PATHINFO_EXTENSION);
+            $new_logo_beyaz_name = 'logo_beyaz_' . time() . '.' . $ext;
+            if (move_uploaded_file($_FILES['logo_beyaz']['tmp_name'], $settings_dir . '/' . $new_logo_beyaz_name)) {
+                if ($logo_beyaz && file_exists($settings_dir . '/' . $logo_beyaz)) {
+                    @unlink($settings_dir . '/' . $logo_beyaz);
+                }
+                $logo_beyaz = $new_logo_beyaz_name;
             }
         }
 
@@ -76,13 +89,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 instagram = ?, 
                 twitter = ?, 
                 linkedin = ?,
-                sahibinden_url = ?
+                sahibinden_url = ?,
+                logo_beyaz = ?
                 WHERE id = ?");
             $update->execute([
                 $site_baslik, $site_aciklama, $site_anahtar_kelimeler, 
                 $logo, $favicon, $google_analytics, $google_search_console, 
                 $iletisim_telefon, $iletisim_eposta, $iletisim_adres, 
                 $facebook, $instagram, $twitter, $linkedin, $sahibinden_url,
+                $logo_beyaz,
                 $ayarlar['id']
             ]);
         } else {
@@ -90,13 +105,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 site_baslik, site_aciklama, site_anahtar_kelimeler, 
                 logo, favicon, google_analytics, google_search_console, 
                 iletisim_telefon, iletisim_eposta, iletisim_adres, 
-                facebook, instagram, twitter, linkedin, sahibinden_url
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                facebook, instagram, twitter, linkedin, sahibinden_url, logo_beyaz
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             $insert->execute([
                 $site_baslik, $site_aciklama, $site_anahtar_kelimeler, 
                 $logo, $favicon, $google_analytics, $google_search_console, 
                 $iletisim_telefon, $iletisim_eposta, $iletisim_adres, 
-                $facebook, $instagram, $twitter, $linkedin, $sahibinden_url
+                $facebook, $instagram, $twitter, $linkedin, $sahibinden_url,
+                $logo_beyaz
             ]);
         }
 
@@ -208,16 +224,19 @@ require_once 'includes/header.php';
                     <h5 class="mb-0 fw-bold text-dark"><i class="fa-solid fa-palette me-2"></i> Marka Varlıkları</h5>
                 </div>
                 <div class="card-body p-4">
+                        <input type="file" class="form-control form-control-sm" name="logo" accept="image/*">
+                    </div>
+
                     <div class="mb-4 text-center">
-                        <label class="form-label fw-bold text-secondary small d-block mb-3">Site Logosu</label>
-                        <div class="mb-3 p-3 bg-light rounded border d-flex align-items-center justify-content-center" style="min-height:100px;">
-                            <?php if ($ayarlar['logo'] && file_exists($settings_dir . '/' . $ayarlar['logo'])): ?>
-                                <img src="uploads/settings/<?= $ayarlar['logo'] ?>" alt="Logo" style="max-height:80px; max-width:100%;">
+                        <label class="form-label fw-bold text-secondary small d-block mb-3">Beyaz Logo (Footer İçin)</label>
+                        <div class="mb-3 p-3 bg-dark rounded border d-flex align-items-center justify-content-center" style="min-height:100px;">
+                            <?php if ($ayarlar['logo_beyaz'] && file_exists($settings_dir . '/' . $ayarlar['logo_beyaz'])): ?>
+                                <img src="uploads/settings/<?= $ayarlar['logo_beyaz'] ?>" alt="Logo Beyaz" style="max-height:80px; max-width:100%;">
                             <?php else: ?>
-                                <span class="text-muted small italic">Logo yüklenmemiş</span>
+                                <span class="text-white bg-secondary opacity-75 small italic p-1 rounded">Logo yüklenmemiş</span>
                             <?php endif; ?>
                         </div>
-                        <input type="file" class="form-control form-control-sm" name="logo" accept="image/*">
+                        <input type="file" class="form-control form-control-sm" name="logo_beyaz" accept="image/*">
                     </div>
                     
                     <hr class="text-secondary opacity-25">

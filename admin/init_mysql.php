@@ -171,14 +171,15 @@ try {
         instagram VARCHAR(255),
         twitter VARCHAR(255),
         linkedin VARCHAR(255),
-        sahibinden_url VARCHAR(255)
+        sahibinden_url VARCHAR(255),
+        logo_beyaz VARCHAR(255)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;");
 
-    // site_ayarlari tablosu için sütun kontrolü
-    $check_sh_url = $db->query("SHOW COLUMNS FROM site_ayarlari LIKE 'sahibinden_url'");
-    if (!$check_sh_url->fetch()) {
-        $db->exec("ALTER TABLE site_ayarlari ADD COLUMN sahibinden_url VARCHAR(255) AFTER linkedin");
-        echo "<span style='color:#e62236;'>ℹ <b>site_ayarlari</b> tablosuna <b>sahibinden_url</b> sütunu eklendi.</span><br>";
+    // site_ayarlari tablosu için sütun kontrolleri
+    $check_logo_beyaz = $db->query("SHOW COLUMNS FROM site_ayarlari LIKE 'logo_beyaz'");
+    if (!$check_logo_beyaz->fetch()) {
+        $db->exec("ALTER TABLE site_ayarlari ADD COLUMN logo_beyaz VARCHAR(255) AFTER logo");
+        echo "<span style='color:#e62236;'>ℹ <b>site_ayarlari</b> tablosuna <b>logo_beyaz</b> sütunu eklendi.</span><br>";
     }
     echo "<span style='color:green;'>✔ <b>site_ayarlari</b> tablosu hazır.</span><br>";
 
