@@ -9,7 +9,7 @@ foreach($dirs as $dir) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $fields = ['baslik', 'slug', 'durumu', 'aciklama', 'fiyat', 'portfoy_yoneticisi_id', 'il', 'ilce', 'mahalle', 'ilan_no', 'ilan_tarihi', 'emlak_tipi', 'm2_brut', 'm2_net', 'oda_sayisi', 'bina_yasi', 'bulundugu_kat', 'kat_sayisi', 'isitma', 'banyo_sayisi', 'mutfak', 'balkon', 'asansor', 'otopark', 'esyali', 'kullanim_durumu', 'site_icerisinde', 'site_adi', 'aidat', 'krediye_uygun', 'tapu_durumu', 'konum', 'harita_konumu'];
+    $fields = ['baslik', 'slug', 'sahibinden_link', 'durumu', 'aciklama', 'fiyat', 'portfoy_yoneticisi_id', 'il', 'ilce', 'mahalle', 'ilan_no', 'ilan_tarihi', 'emlak_tipi', 'm2_brut', 'm2_net', 'oda_sayisi', 'bina_yasi', 'bulundugu_kat', 'kat_sayisi', 'isitma', 'banyo_sayisi', 'mutfak', 'balkon', 'asansor', 'otopark', 'esyali', 'kullanim_durumu', 'site_icerisinde', 'site_adi', 'aidat', 'krediye_uygun', 'tapu_durumu', 'konum', 'harita_konumu'];
     
     $vals = [];
     foreach($fields as $f) {
@@ -271,8 +271,14 @@ require_once 'includes/header.php';
                                 <label class="form-label fw-bold text-secondary small">Banyo Sayısı</label>
                                 <input type="number" class="form-control" name="banyo_sayisi" value="1">
                             </div>
-                            <!-- Ek Özellikler -->
-                            <div class="col-md-3 mb-3">
+                            <!-- Sahibinden Link -->
+                            <div class="col-md-12 mb-3">
+                                <label class="form-label fw-bold text-secondary small">Sahibinden.com İlan Linki</label>
+                                <input type="url" class="form-control" name="sahibinden_link" placeholder="https://www.sahibinden.com/ilan/...">
+                            </div>
+
+                            <!-- Fiyat ve Durum -->
+                            <div class="col-md-6 mb-3">
                                 <label class="form-label fw-bold text-secondary small">Asansör</label>
                                 <select class="form-select" name="asansor"><option value="Var">Var</option><option value="Yok">Yok</option></select>
                             </div>

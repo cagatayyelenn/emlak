@@ -31,6 +31,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $instagram = $_POST['instagram'] ?? '';
         $twitter = $_POST['twitter'] ?? '';
         $linkedin = $_POST['linkedin'] ?? '';
+        $sahibinden_url = $_POST['sahibinden_url'] ?? '';
 
         $logo = $ayarlar['logo'] ?? '';
         $favicon = $ayarlar['favicon'] ?? '';
@@ -74,13 +75,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 facebook = ?, 
                 instagram = ?, 
                 twitter = ?, 
-                linkedin = ?
+                linkedin = ?,
+                sahibinden_url = ?
                 WHERE id = ?");
             $update->execute([
                 $site_baslik, $site_aciklama, $site_anahtar_kelimeler, 
                 $logo, $favicon, $google_analytics, $google_search_console, 
                 $iletisim_telefon, $iletisim_eposta, $iletisim_adres, 
-                $facebook, $instagram, $twitter, $linkedin, 
+                $facebook, $instagram, $twitter, $linkedin, $sahibinden_url,
                 $ayarlar['id']
             ]);
         } else {
@@ -88,13 +90,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 site_baslik, site_aciklama, site_anahtar_kelimeler, 
                 logo, favicon, google_analytics, google_search_console, 
                 iletisim_telefon, iletisim_eposta, iletisim_adres, 
-                facebook, instagram, twitter, linkedin
-            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                facebook, instagram, twitter, linkedin, sahibinden_url
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
             $insert->execute([
                 $site_baslik, $site_aciklama, $site_anahtar_kelimeler, 
                 $logo, $favicon, $google_analytics, $google_search_console, 
                 $iletisim_telefon, $iletisim_eposta, $iletisim_adres, 
-                $facebook, $instagram, $twitter, $linkedin
+                $facebook, $instagram, $twitter, $linkedin, $sahibinden_url
             ]);
         }
 
@@ -189,6 +191,10 @@ require_once 'includes/header.php';
                         <div class="col-md-6 mb-3">
                             <label class="form-label fw-bold text-secondary small"><i class="fa-brands fa-linkedin-in me-1"></i> LinkedIn</label>
                             <input type="url" class="form-control" name="linkedin" value="<?= htmlspecialchars($ayarlar['linkedin'] ?? '') ?>" placeholder="https://linkedin.com/in/kullanici">
+                        </div>
+                        <div class="col-md-12 mb-3">
+                            <label class="form-label fw-bold text-secondary small"><i class="fa-solid fa-link me-1"></i> Sahibinden.com Ofis Profili</label>
+                            <input type="url" class="form-control" name="sahibinden_url" value="<?= htmlspecialchars($ayarlar['sahibinden_url'] ?? '') ?>" placeholder="https://sahibinden.com/emlak-ofisi/kullanici">
                         </div>
                     </div>
                 </div>

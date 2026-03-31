@@ -95,9 +95,15 @@ require_once __DIR__ . '/db.php';
                                         </div>
                                     </div>
                                     <div class="flat-bt-top">
-                                        <a class="tf-btn primary" href="admin/login.php">
-                                            Yönetim Paneli
-                                        </a>
+                                        <?php if(!empty($site_set['sahibinden_url'])): ?>
+                                            <a class="tf-btn primary" href="<?php echo $site_set['sahibinden_url']; ?>" target="_blank">
+                                                Sahibinden.com
+                                            </a>
+                                        <?php else: ?>
+                                            <a class="tf-btn primary" href="admin/login.php">
+                                                Yönetim Paneli
+                                            </a>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
 

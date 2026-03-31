@@ -59,6 +59,7 @@ try {
         harita_konumu TEXT,
         vitrin_gorseli VARCHAR(255),
         slug VARCHAR(255) UNIQUE,
+        sahibinden_link TEXT,
         yayin_durumu VARCHAR(50) DEFAULT 'Aktif',
         INDEX (portfoy_yoneticisi_id),
         FOREIGN KEY (portfoy_yoneticisi_id) REFERENCES portfoy_yoneticileri(id) ON DELETE SET NULL
@@ -69,6 +70,12 @@ try {
     if (!$check_slug->fetch()) {
         $db->exec("ALTER TABLE ilanlar ADD COLUMN slug VARCHAR(255) UNIQUE AFTER vitrin_gorseli");
         echo "<span style='color:#e62236;'>ℹ <b>ilanlar</b> tablosuna <b>slug</b> sütunu eklendi.</span><br>";
+    }
+
+    $check_sh_link = $db->query("SHOW COLUMNS FROM ilanlar LIKE 'sahibinden_link'");
+    if (!$check_sh_link->fetch()) {
+        $db->exec("ALTER TABLE ilanlar ADD COLUMN sahibinden_link TEXT AFTER slug");
+        echo "<span style='color:#e62236;'>ℹ <b>ilanlar</b> tablosuna <b>sahibinden_link</b> sütunu eklendi.</span><br>";
     }
     
     echo "<span style='color:green;'>✔ <b>ilanlar</b> tablosu hazır.</span><br>";
@@ -153,8 +160,16 @@ try {
         facebook VARCHAR(255),
         instagram VARCHAR(255),
         twitter VARCHAR(255),
-        linkedin VARCHAR(255)
+        linkedin VARCHAR(255),
+        sahibinden_url VARCHAR(255)
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;");
+
+    // site_ayarlari tablosu için sütun kontrolü
+    $check_sh_url = $db->query("SHOW COLUMNS FROM site_ayarlari LIKE 'sahibinden_url'");
+    if (!$check_sh_url->fetch()) {
+        $db->exec("ALTER TABLE site_ayarlari ADD COLUMN sahibinden_url VARCHAR(255) AFTER linkedin");
+        echo "<span style='color:#e62236;'>ℹ <b>site_ayarlari</b> tablosuna <b>sahibinden_url</b> sütunu eklendi.</span><br>";
+    }
     echo "<span style='color:green;'>✔ <b>site_ayarlari</b> tablosu hazır.</span><br>";
 
     // Varsayılan Site Ayarlarını ekle
