@@ -18,89 +18,91 @@ try {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $site_baslik = $_POST['site_baslik'] ?? '';
-    $site_aciklama = $_POST['site_aciklama'] ?? '';
-    $site_anahtar_kelimeler = $_POST['site_anahtar_kelimeler'] ?? '';
-    $google_analytics = $_POST['google_analytics'] ?? '';
-    $google_search_console = $_POST['google_search_console'] ?? '';
-    $iletisim_telefon = $_POST['iletisim_telefon'] ?? '';
-    $iletisim_eposta = $_POST['iletisim_eposta'] ?? '';
-    $iletisim_adres = $_POST['iletisim_adres'] ?? '';
-    $facebook = $_POST['facebook'] ?? '';
-    $instagram = $_POST['instagram'] ?? '';
-    $twitter = $_POST['twitter'] ?? '';
-    $linkedin = $_POST['linkedin'] ?? '';
+    try {
+        $site_baslik = $_POST['site_baslik'] ?? '';
+        $site_aciklama = $_POST['site_aciklama'] ?? '';
+        $site_anahtar_kelimeler = $_POST['site_anahtar_kelimeler'] ?? '';
+        $google_analytics = $_POST['google_analytics'] ?? '';
+        $google_search_console = $_POST['google_search_console'] ?? '';
+        $iletisim_telefon = $_POST['iletisim_telefon'] ?? '';
+        $iletisim_eposta = $_POST['iletisim_eposta'] ?? '';
+        $iletisim_adres = $_POST['iletisim_adres'] ?? '';
+        $facebook = $_POST['facebook'] ?? '';
+        $instagram = $_POST['instagram'] ?? '';
+        $twitter = $_POST['twitter'] ?? '';
+        $linkedin = $_POST['linkedin'] ?? '';
 
-    $logo = $ayarlar['logo'] ?? '';
-    $favicon = $ayarlar['favicon'] ?? '';
+        $logo = $ayarlar['logo'] ?? '';
+        $favicon = $ayarlar['favicon'] ?? '';
 
-    // Logo Yükleme
-    if (isset($_FILES['logo']) && $_FILES['logo']['error'] === UPLOAD_ERR_OK) {
-        $ext = pathinfo($_FILES['logo']['name'], PATHINFO_EXTENSION);
-        $new_logo_name = 'logo_' . time() . '.' . $ext;
-        if (move_uploaded_file($_FILES['logo']['tmp_name'], $settings_dir . '/' . $new_logo_name)) {
-            // Eski logoyu sil (varsa)
-            if ($logo && file_exists($settings_dir . '/' . $logo)) {
-                @unlink($settings_dir . '/' . $logo);
+        // Logo Yükleme
+        if (isset($_FILES['logo']) && $_FILES['logo']['error'] === UPLOAD_ERR_OK) {
+            $ext = pathinfo($_FILES['logo']['name'], PATHINFO_EXTENSION);
+            $new_logo_name = 'logo_' . time() . '.' . $ext;
+            if (move_uploaded_file($_FILES['logo']['tmp_name'], $settings_dir . '/' . $new_logo_name)) {
+                if ($logo && file_exists($settings_dir . '/' . $logo)) {
+                    @unlink($settings_dir . '/' . $logo);
+                }
+                $logo = $new_logo_name;
             }
-            $logo = $new_logo_name;
         }
-    }
 
-    // Favicon Yükleme
-    if (isset($_FILES['favicon']) && $_FILES['favicon']['error'] === UPLOAD_ERR_OK) {
-        $ext = pathinfo($_FILES['favicon']['name'], PATHINFO_EXTENSION);
-        $new_favicon_name = 'favicon_' . time() . '.' . $ext;
-        if (move_uploaded_file($_FILES['favicon']['tmp_name'], $settings_dir . '/' . $new_favicon_name)) {
-            // Eski faviconu sil (varsa)
-            if ($favicon && file_exists($settings_dir . '/' . $favicon)) {
-                @unlink($settings_dir . '/' . $favicon);
+        // Favicon Yükleme
+        if (isset($_FILES['favicon']) && $_FILES['favicon']['error'] === UPLOAD_ERR_OK) {
+            $ext = pathinfo($_FILES['favicon']['name'], PATHINFO_EXTENSION);
+            $new_favicon_name = 'favicon_' . time() . '.' . $ext;
+            if (move_uploaded_file($_FILES['favicon']['tmp_name'], $settings_dir . '/' . $new_favicon_name)) {
+                if ($favicon && file_exists($settings_dir . '/' . $favicon)) {
+                    @unlink($settings_dir . '/' . $favicon);
+                }
+                $favicon = $new_favicon_name;
             }
-            $favicon = $new_favicon_name;
         }
-    }
 
-    if ($ayarlar) {
-        $update = $db->prepare("UPDATE site_ayarlari SET 
-            site_baslik = ?, 
-            site_aciklama = ?, 
-            site_anahtar_kelimeler = ?, 
-            logo = ?, 
-            favicon = ?, 
-            google_analytics = ?, 
-            google_search_console = ?, 
-            iletisim_telefon = ?, 
-            iletisim_eposta = ?, 
-            iletisim_adres = ?, 
-            facebook = ?, 
-            instagram = ?, 
-            twitter = ?, 
-            linkedin = ?
-            WHERE id = ?");
-        $update->execute([
-            $site_baslik, $site_aciklama, $site_anahtar_kelimeler, 
-            $logo, $favicon, $google_analytics, $google_search_console, 
-            $iletisim_telefon, $iletisim_eposta, $iletisim_adres, 
-            $facebook, $instagram, $twitter, $linkedin, 
-            $ayarlar['id']
-        ]);
-    } else {
-        $insert = $db->prepare("INSERT INTO site_ayarlari (
-            site_baslik, site_aciklama, site_anahtar_kelimeler, 
-            logo, favicon, google_analytics, google_search_console, 
-            iletisim_telefon, iletisim_eposta, iletisim_adres, 
-            facebook, instagram, twitter, linkedin
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
-        $insert->execute([
-            $site_baslik, $site_aciklama, $site_anahtar_kelimeler, 
-            $logo, $favicon, $google_analytics, $google_search_console, 
-            $iletisim_telefon, $iletisim_eposta, $iletisim_adres, 
-            $facebook, $instagram, $twitter, $linkedin
-        ]);
-    }
+        if ($ayarlar) {
+            $update = $db->prepare("UPDATE site_ayarlari SET 
+                site_baslik = ?, 
+                site_aciklama = ?, 
+                site_anahtar_kelimeler = ?, 
+                logo = ?, 
+                favicon = ?, 
+                google_analytics = ?, 
+                google_search_console = ?, 
+                iletisim_telefon = ?, 
+                iletisim_eposta = ?, 
+                iletisim_adres = ?, 
+                facebook = ?, 
+                instagram = ?, 
+                twitter = ?, 
+                linkedin = ?
+                WHERE id = ?");
+            $update->execute([
+                $site_baslik, $site_aciklama, $site_anahtar_kelimeler, 
+                $logo, $favicon, $google_analytics, $google_search_console, 
+                $iletisim_telefon, $iletisim_eposta, $iletisim_adres, 
+                $facebook, $instagram, $twitter, $linkedin, 
+                $ayarlar['id']
+            ]);
+        } else {
+            $insert = $db->prepare("INSERT INTO site_ayarlari (
+                site_baslik, site_aciklama, site_anahtar_kelimeler, 
+                logo, favicon, google_analytics, google_search_console, 
+                iletisim_telefon, iletisim_eposta, iletisim_adres, 
+                facebook, instagram, twitter, linkedin
+            ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $insert->execute([
+                $site_baslik, $site_aciklama, $site_anahtar_kelimeler, 
+                $logo, $favicon, $google_analytics, $google_search_console, 
+                $iletisim_telefon, $iletisim_eposta, $iletisim_adres, 
+                $facebook, $instagram, $twitter, $linkedin
+            ]);
+        }
 
-    header("Location: ayarlar.php?basari=1");
-    exit;
+        header("Location: ayarlar.php?basari=1");
+        exit;
+    } catch (Exception $e) {
+        $error_msg = "Ayar Güncelleme Hatası: " . $e->getMessage();
+    }
 }
 
 require_once 'includes/header.php';
@@ -112,6 +114,12 @@ require_once 'includes/header.php';
         <p class="text-muted small">Sitenin SEO, marka ve iletişim bilgilerini buradan yönetebilirsiniz.</p>
     </div>
 </div>
+
+<?php if (isset($error_msg)): ?>
+<div class="alert alert-danger border-0 shadow-sm mb-4">
+    <i class="fa-solid fa-triangle-exclamation me-2"></i> <?= $error_msg ?>
+</div>
+<?php endif; ?>
 
 <?php if (isset($_GET['basari'])): ?>
 <div class="alert alert-success alert-dismissible fade show border-0 shadow-sm mb-4" role="alert">

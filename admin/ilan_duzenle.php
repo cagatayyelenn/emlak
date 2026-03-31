@@ -8,6 +8,12 @@ if (!isset($_GET['id'])) {
 }
 $id = $_GET['id'];
 
+// Upload dizinlerini kontrol et/oluştur
+$upload_dirs = ['uploads', 'uploads/images', 'uploads/videos'];
+foreach($upload_dirs as $dir) {
+    if(!is_dir(__DIR__ . '/' . $dir)) mkdir(__DIR__ . '/' . $dir, 0777, true);
+}
+
 // AJAX içermeyen basit medya silme
 if (isset($_GET['medya_sil'])) {
     $mid = $_GET['medya_sil'];
@@ -34,67 +40,75 @@ if (isset($_GET['vitrin_yap'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $fields = ['baslik', 'durumu', 'aciklama', 'fiyat', 'portfoy_yoneticisi_id', 'il', 'ilce', 'mahalle', 'ilan_no', 'ilan_tarihi', 'emlak_tipi', 'm2_brut', 'm2_net', 'oda_sayisi', 'bina_yasi', 'bulundugu_kat', 'kat_sayisi', 'isitma', 'banyo_sayisi', 'mutfak', 'balkon', 'asansor', 'otopark', 'esyali', 'kullanim_durumu', 'site_icerisinde', 'site_adi', 'aidat', 'krediye_uygun', 'tapu_durumu', 'konum', 'harita_konumu'];
-    
-    $vals_assoc = []; // Use an associative array first to handle price formatting
-    foreach($fields as $f) {
-        $val = $_POST[$f] ?? null;
-        if($val === '') $val = null;
-        $vals_assoc[$f] = $val;
-    }
-
-    // Apply price formatting for 'fiyat' and 'aidat'
-    foreach(['fiyat', 'aidat'] as $pa) {
-        if(isset($vals_assoc[$pa]) && $vals_assoc[$pa] !== null) {
-            $temiz = str_replace('.', '', $vals_assoc[$pa]);
-            $temiz = str_replace(',', '.', $temiz);
-            $vals_assoc[$pa] = (float) $temiz;
-        }
-    }
-
-    if (!empty($_POST['baslik'])) {
-        $setQuery = implode('=?, ', $fields) . '=?'; 
+    try {
+        $fields = ['baslik', 'durumu', 'aciklama', 'fiyat', 'portfoy_yoneticisi_id', 'il', 'ilce', 'mahalle', 'ilan_no', 'ilan_tarihi', 'emlak_tipi', 'm2_brut', 'm2_net', 'oda_sayisi', 'bina_yasi', 'bulundugu_kat', 'kat_sayisi', 'isitma', 'banyo_sayisi', 'mutfak', 'balkon', 'asansor', 'otopark', 'esyali', 'kullanim_durumu', 'site_icerisinde', 'site_adi', 'aidat', 'krediye_uygun', 'tapu_durumu', 'konum', 'harita_konumu'];
         
-        // Convert associative array back to indexed array in the correct order for PDO execute
-        $vals = [];
-        foreach ($fields as $f) {
-            $vals[] = $vals_assoc[$f];
+        $vals_assoc = []; 
+        foreach($fields as $f) {
+            $val = $_POST[$f] ?? null;
+            if($val === '') $val = null;
+            $vals_assoc[$f] = $val;
         }
 
-        $vals[] = $id; // WHERE id = ?
-        $stmt = $db->prepare("UPDATE ilanlar SET $setQuery WHERE id=?");
-        $stmt->execute($vals);
+        // Para formatı temizliği
+        foreach(['fiyat', 'aidat'] as $pa) {
+            if(isset($vals_assoc[$pa]) && $vals_assoc[$pa] !== null) {
+                $temiz = str_replace('.', '', $vals_assoc[$pa]);
+                $temiz = str_replace(',', '.', $temiz);
+                $vals_assoc[$pa] = (float) $temiz;
+            }
+        }
 
-        // Yeni Görselleri yükle
-        if (isset($_FILES['gorseller']) && !empty($_FILES['gorseller']['name'][0])) {
-            $count = count($_FILES['gorseller']['name']);
-            for ($i=0; $i<$count; $i++) {
-                if($_FILES['gorseller']['error'][$i] === UPLOAD_ERR_OK) {
-                    $tmp = $_FILES['gorseller']['tmp_name'][$i];
-                    $name = time() . '_' . rand(100,999) . '_' . preg_replace("/[^a-zA-Z0-9.\-_]/", "", basename($_FILES['gorseller']['name'][$i]));
-                    if (move_uploaded_file($tmp, __DIR__ . '/uploads/images/' . $name)) {
-                        $mstmt = $db->prepare("INSERT INTO ilan_medya (ilan_id, medya_tipi, dosya_yolu) VALUES (?, 'gorsel', ?)");
-                        $mstmt->execute([$id, $name]);
+        if (!empty($_POST['baslik'])) {
+            $setQuery = implode('=?, ', $fields) . '=?'; 
+            
+            $vals = [];
+            foreach ($fields as $f) {
+                $vals[] = $vals_assoc[$f];
+            }
+            $vals[] = $id;
+
+            $stmt = $db->prepare("UPDATE ilanlar SET $setQuery WHERE id=?");
+            $stmt->execute($vals);
+
+            // Yeni Görselleri yükle
+            if (isset($_FILES['gorseller']) && !empty($_FILES['gorseller']['name'][0])) {
+                $count = count($_FILES['gorseller']['name']);
+                for ($i=0; $i<$count; $i++) {
+                    if($_FILES['gorseller']['error'][$i] === UPLOAD_ERR_OK) {
+                        $tmp = $_FILES['gorseller']['tmp_name'][$i];
+                        $original_name = basename($_FILES['gorseller']['name'][$i]);
+                        $clean_name = preg_replace("/[^a-zA-Z0-9.\-_]/", "", $original_name);
+                        $final_name = time() . '_' . rand(100,999) . '_' . $clean_name;
+                        
+                        $upload_path = __DIR__ . '/uploads/images/' . $final_name;
+                        
+                        if (move_uploaded_file($tmp, $upload_path)) {
+                            $mstmt = $db->prepare("INSERT INTO ilan_medya (ilan_id, medya_tipi, dosya_yolu) VALUES (?, 'gorsel', ?)");
+                            $mstmt->execute([$id, $final_name]);
+                        }
                     }
                 }
             }
-        }
 
-        // Yeni Video yükle
-        if (isset($_FILES['video_dosya']) && $_FILES['video_dosya']['error'] === UPLOAD_ERR_OK) {
-            $vtmp = $_FILES['video_dosya']['tmp_name'];
-            $vname = time() . '_' . rand(100,999) . '_' . preg_replace("/[^a-zA-Z0-9.\-_]/", "", basename($_FILES['video_dosya']['name']));
-            if (move_uploaded_file($vtmp, __DIR__ . '/uploads/videos/' . $vname)) {
-                $mstmt = $db->prepare("INSERT INTO ilan_medya (ilan_id, medya_tipi, dosya_yolu) VALUES (?, 'video', ?)");
-                $mstmt->execute([$id, $vname]);
+            // Yeni Video yükle
+            if (isset($_FILES['video_dosya']) && $_FILES['video_dosya']['error'] === UPLOAD_ERR_OK) {
+                $vtmp = $_FILES['video_dosya']['tmp_name'];
+                $vname = time() . '_' . rand(100,999) . '_' . preg_replace("/[^a-zA-Z0-9.\-_]/", "", basename($_FILES['video_dosya']['name']));
+                if (move_uploaded_file($vtmp, __DIR__ . '/uploads/videos/' . $vname)) {
+                    $mstmt = $db->prepare("INSERT INTO ilan_medya (ilan_id, medya_tipi, dosya_yolu) VALUES (?, 'video', ?)");
+                    $mstmt->execute([$id, $vname]);
+                }
+            } elseif (!empty($_POST['video_url'])) {
+                $mstmt = $db->prepare("INSERT INTO ilan_medya (ilan_id, medya_tipi, dosya_yolu) VALUES (?, 'video_url', ?)");
+                $mstmt->execute([$id, $_POST['video_url']]);
             }
-        } elseif (!empty($_POST['video_url'])) {
-            $mstmt = $db->prepare("INSERT INTO ilan_medya (ilan_id, medya_tipi, dosya_yolu) VALUES (?, 'video_url', ?)");
-            $mstmt->execute([$id, $_POST['video_url']]);
-        }
 
-        header("Location: ilan_duzenle.php?id=$id&basari=1");
-        exit;
+            header("Location: ilan_duzenle.php?id=$id&basari=1");
+            exit;
+        }
+    } catch (Exception $e) {
+        $error_msg = "Sistem Hatası: " . $e->getMessage();
     }
 }
 
@@ -121,6 +135,10 @@ require_once 'includes/header.php';
         <a href="ilanlar.php" class="btn btn-outline-secondary btn-sm fw-bold"><i class="fa-solid fa-arrow-left me-1"></i> Tüm İlanlar</a>
     </div>
 </div>
+
+<?php if(isset($error_msg)): ?>
+    <div class="alert alert-danger shadow-sm rounded-0 border-0 border-start border-5 border-danger"><i class="fa-solid fa-triangle-exclamation me-2"></i> <?= $error_msg ?></div>
+<?php endif; ?>
 
 <?php if(isset($_GET['basari']) && $_GET['basari'] == 1): ?>
     <div class="alert alert-success shadow-sm rounded-0 border-0 border-start border-5 border-success"><i class="fa-solid fa-check-circle me-2"></i> İlan bilgileri başarıyla güncellendi.</div>

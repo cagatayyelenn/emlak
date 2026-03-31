@@ -79,16 +79,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             header("Location: ilanlar.php?basari=1");
             exit;
             
-        } catch (PDOException $e) {
-            die("<div style='padding:50px; font-family:sans-serif; text-align:center;'>
-                <h1 style='color:red;'>SQL Kayıt Hatası (500 Error Engellendi)</h1>
-                <p>Veritabanı işlemi sırasında bir hata oluştu. Muhtemelen yeni eklenen veritabanı sütunları (örn: durumu, vitrin_gorseli) canlı sunucudaki SQLite dosyanızda bulunmuyor.</p>
-                <div style='background:#f4f4f4; padding:20px; border-radius: 0px; margin-top:20px; text-align:left;'>
-                    <strong>Hata Kod Çıktısı:</strong><br><br>
-                    <code>" . htmlspecialchars($e->getMessage()) . "</code>
-                </div>
-                <p style='margin-top:30px;'>Bu sorunu çözmek için lütfen adres çubuğunuza <br><b>seninsiteniz.com/update_db_stepper.php</b> yazıp tek seferlik çalıştırın ve tekrar deneyin.</p>
-            </div>");
+        } catch (Exception $e) {
+            $error_msg = "Kayıt Hatası: " . $e->getMessage();
         }
     }
 }
@@ -118,6 +110,12 @@ require_once 'includes/header.php';
         <a href="ilanlar.php" class="btn btn-outline-secondary btn-sm fw-bold align-self-start"><i class="fa-solid fa-arrow-left me-1"></i> İptal</a>
     </div>
 </div>
+
+<?php if (isset($error_msg)): ?>
+<div class="alert alert-danger border-0 shadow-sm mb-4">
+    <i class="fa-solid fa-triangle-exclamation me-2"></i> <?= $error_msg ?>
+</div>
+<?php endif; ?>
 
 <div class="card shadow-sm border-0 mb-5 rounded-0">
     <div class="card-body p-0">
