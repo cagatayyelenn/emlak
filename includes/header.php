@@ -7,6 +7,7 @@ require_once __DIR__ . '/db.php';
 
 <head>
     <meta charset="utf-8">
+    <base href="/">
     <title><?php echo htmlspecialchars($site_set['site_baslik']); ?></title>
     <meta name="keywords" content="<?php echo htmlspecialchars($site_set['site_anahtar_kelimeler']); ?>">
     <meta name="description" content="<?php echo htmlspecialchars($site_set['site_aciklama']); ?>">
