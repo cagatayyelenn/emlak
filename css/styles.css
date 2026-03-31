@@ -981,6 +981,9 @@ label {
   align-items: center;
   justify-content: space-between;
 }
+.main-header .inner-header .nav-outer {
+  margin: 0 auto;
+}
 .main-header.is-fixed {
   box-shadow: 0px 4px 18px 0px rgba(0, 0, 0, 0.0784313725);
   background-color: #ffffff;

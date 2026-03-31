@@ -71,20 +71,20 @@ require_once __DIR__ . '/db.php';
                                             </a>
                                         </div>
                                     </div>
-                                    <div class="nav-outer flex align-center">
-                                        <!-- Main Menu -->
-                                        <nav class="main-menu show navbar-expand-md">
-                                            <div class="navbar-collapse collapse clearfix" id="navbarSupportedContent">
-                                                <ul class="navigation clearfix">
-                                                    <li class="home"><a href="index.php">Anasayfa</a></li>
-                                                    <li><a href="ilanlar.php">İlanlar</a></li>
-                                                    <li><a href="hakkimizda.php">Hakkımızda</a></li>
-                                                    <li><a href="iletisim.php">İletişim</a></li>
-                                                </ul>
-                                            </div>
-                                        </nav>
-                                        <!-- Main Menu End-->
-                                    </div>
+                                </div>
+                                <div class="nav-outer flex align-center">
+                                    <!-- Main Menu -->
+                                    <nav class="main-menu show navbar-expand-md">
+                                        <div class="navbar-collapse collapse clearfix" id="navbarSupportedContent">
+                                            <ul class="navigation clearfix">
+                                                <li class="home"><a href="index.php">Anasayfa</a></li>
+                                                <li><a href="ilanlar.php">İlanlar</a></li>
+                                                <li><a href="hakkimizda.php">Hakkımızda</a></li>
+                                                <li><a href="iletisim.php">İletişim</a></li>
+                                            </ul>
+                                        </div>
+                                    </nav>
+                                    <!-- Main Menu End-->
                                 </div>
                                 <div class="inner-header-right header-account">
                                     <div class="mobi-icon-box" style="margin-right: 20px;">
