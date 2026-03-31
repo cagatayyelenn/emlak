@@ -43,15 +43,15 @@
                                     <ul class="mt-10">
                                         <li class="mt-12 d-flex align-items-center gap-8">
                                             <i class="icon icon-mapPin"></i>
-                                            <p class="text-variant-2"><?php echo htmlspecialchars($site_set['adres'] ?? ''); ?></p>
+                                            <p class="text-variant-2"><?php echo htmlspecialchars($site_set['iletisim_adres'] ?? ''); ?></p>
                                         </li>
                                         <li class="mt-12 d-flex align-items-center gap-8">
                                             <i class="icon icon-phone2"></i>
-                                            <p class="text-variant-2"><?php echo htmlspecialchars($site_set['telefon'] ?? ''); ?></p>
+                                            <p class="text-variant-2"><?php echo htmlspecialchars($site_set['iletisim_telefon'] ?? ''); ?></p>
                                         </li>
                                         <li class="mt-12 d-flex align-items-center gap-8">
                                             <i class="icon icon-mail"></i>
-                                            <p class="text-variant-2"><?php echo htmlspecialchars($site_set['email'] ?? ''); ?></p>
+                                            <p class="text-variant-2"><?php echo htmlspecialchars($site_set['iletisim_eposta'] ?? ''); ?></p>
                                         </li>
                                     </ul>
                                 </div>

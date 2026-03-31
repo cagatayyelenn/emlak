@@ -91,7 +91,7 @@ require_once __DIR__ . '/db.php';
                                     <div class="mobi-icon-box" style="margin-right: 20px;">
                                         <div class="box d-flex align-items-center">
                                             <span class="icon icon-phone2"></span>
-                                            <div style="font-weight: 600; margin-left: 8px;"><?php echo htmlspecialchars($site_set['telefon'] ?? ''); ?></div>
+                                            <div style="font-weight: 600; margin-left: 8px;"><?php echo htmlspecialchars($site_set['iletisim_telefon'] ?? ''); ?></div>
                                         </div>
                                     </div>
                                     <div class="flat-bt-top">
@@ -128,11 +128,11 @@ require_once __DIR__ . '/db.php';
                             <div class="mobi-icon-box">
                                 <div class="box d-flex align-items-center">
                                     <span class="icon icon-phone2"></span>
-                                    <div><?php echo htmlspecialchars($site_set['telefon'] ?? ''); ?></div>
+                                    <div><?php echo htmlspecialchars($site_set['iletisim_telefon'] ?? ''); ?></div>
                                 </div>
                                 <div class="box d-flex align-items-center">
                                     <span class="icon icon-mail"></span>
-                                    <div><?php echo htmlspecialchars($site_set['email'] ?? ''); ?></div>
+                                    <div><?php echo htmlspecialchars($site_set['iletisim_eposta'] ?? ''); ?></div>
                                 </div>
                             </div>
                         </div>
