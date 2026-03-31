@@ -1,6 +1,7 @@
 <?php
 require_once 'includes/database.php';
 require_once 'includes/auth.php';
+require_once '../includes/slug.php';
 
 if (!isset($_GET['id'])) {
     header("Location: ilanlar.php");
@@ -41,14 +42,18 @@ if (isset($_GET['vitrin_yap'])) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     try {
-        $fields = ['baslik', 'durumu', 'aciklama', 'fiyat', 'portfoy_yoneticisi_id', 'il', 'ilce', 'mahalle', 'ilan_no', 'ilan_tarihi', 'emlak_tipi', 'm2_brut', 'm2_net', 'oda_sayisi', 'bina_yasi', 'bulundugu_kat', 'kat_sayisi', 'isitma', 'banyo_sayisi', 'mutfak', 'balkon', 'asansor', 'otopark', 'esyali', 'kullanim_durumu', 'site_icerisinde', 'site_adi', 'aidat', 'krediye_uygun', 'tapu_durumu', 'konum', 'harita_konumu'];
+        $fields = ['baslik', 'slug', 'durumu', 'aciklama', 'fiyat', 'portfoy_yoneticisi_id', 'il', 'ilce', 'mahalle', 'ilan_no', 'ilan_tarihi', 'emlak_tipi', 'm2_brut', 'm2_net', 'oda_sayisi', 'bina_yasi', 'bulundugu_kat', 'kat_sayisi', 'isitma', 'banyo_sayisi', 'mutfak', 'balkon', 'asansor', 'otopark', 'esyali', 'kullanim_durumu', 'site_icerisinde', 'site_adi', 'aidat', 'krediye_uygun', 'tapu_durumu', 'konum', 'harita_konumu'];
         
         $vals_assoc = []; 
         foreach($fields as $f) {
+            if ($f == 'slug') continue;
             $val = $_POST[$f] ?? null;
             if($val === '') $val = null;
             $vals_assoc[$f] = $val;
         }
+        
+        // Slug oluştur/güncelle
+        $vals_assoc['slug'] = createSlug($vals_assoc['baslik']);
 
         // Para formatı temizliği
         foreach(['fiyat', 'aidat'] as $pa) {

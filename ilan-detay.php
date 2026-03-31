@@ -3,20 +3,24 @@
 require_once __DIR__ . '/includes/db.php';
 
 $id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
+$slug = isset($_GET['slug']) ? $_GET['slug'] : '';
 
-if ($id <= 0) {
+if ($id <= 0 && empty($slug)) {
     header("Location: ilanlar.php");
     exit;
 }
 
 // İlan detaylarını çek
+$where = $slug ? "i.slug = ?" : "i.id = ?";
+$param = $slug ? $slug : $id;
+
 $stmt = $db->prepare("
     SELECT i.*, y.ad_soyad as yonetici_ad, y.telefon as yonetici_tel, y.email as yonetici_email, y.gorsel as yonetici_gorsel
     FROM ilanlar i 
     LEFT JOIN portfoy_yoneticileri y ON i.portfoy_yoneticisi_id = y.id 
-    WHERE i.id = ?
+    WHERE $where
 ");
-$stmt->execute([$id]);
+$stmt->execute([$param]);
 $ilan = $stmt->fetch(PDO::FETCH_ASSOC);
 
 if (!$ilan) {
@@ -26,7 +30,7 @@ if (!$ilan) {
 
 // İlan medyalarını çek
 $medya_stmt = $db->prepare("SELECT * FROM ilan_medya WHERE ilan_id = ? ORDER BY id ASC");
-$medya_stmt->execute([$id]);
+$medya_stmt->execute([$ilan['id']]);
 $medyalar = $medya_stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $gorseller = array_filter($medyalar, function($m) { return $m['medya_tipi'] === 'gorsel'; });

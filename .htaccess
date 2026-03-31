@@ -1,0 +1,11 @@
+RewriteEngine On
+RewriteBase /
+
+# İlan detay sayfası yönlendirmesi
+# Örn: /ilan/satilik-villa-ilani -> ilan-detay.php?slug=satilik-villa-ilani
+RewriteRule ^ilan/([a-zA-Z0-9-]+)/?$ ilan-detay.php?slug=$1 [L,QSA]
+
+# Diğer sayfalar için opsiyonel (örn: /iletisim -> iletisim.php)
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([a-zA-Z0-9-]+)/?$ $1.php [L,QSA]

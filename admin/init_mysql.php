@@ -58,6 +58,7 @@ try {
         konum TEXT,
         harita_konumu TEXT,
         vitrin_gorseli VARCHAR(255),
+        slug VARCHAR(255) UNIQUE,
         yayin_durumu VARCHAR(50) DEFAULT 'Aktif',
         INDEX (portfoy_yoneticisi_id),
         FOREIGN KEY (portfoy_yoneticisi_id) REFERENCES portfoy_yoneticileri(id) ON DELETE SET NULL

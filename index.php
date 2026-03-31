@@ -107,7 +107,7 @@ require_once __DIR__ . '/includes/header.php';
                             <div class="col-xl-4 col-lg-6 col-md-6 mb-4">
                                 <div class="homelengo-box">
                                     <div class="archive-top">
-                                        <a href="ilan-detay.php?id=<?php echo $ilan['id']; ?>" class="images-group">
+                                        <a href="ilan/<?php echo $ilan['slug']; ?>" class="images-group">
                                             <div class="images-style">
                                                 <?php if(!empty($ilan['vitrin_gorseli'])): ?>
                                                     <img src="admin/uploads/images/<?php echo $ilan['vitrin_gorseli']; ?>" alt="img" class="lazyload">
@@ -132,7 +132,7 @@ require_once __DIR__ . '/includes/header.php';
                                     </div>
                                     <div class="archive-bottom">
                                         <div class="content-top">
-                                            <h6 class="text-capitalize"><a href="ilan-detay.php?id=<?php echo $ilan['id']; ?>" class="link"><?php echo htmlspecialchars($ilan['baslik']); ?></a></h6>
+                                            <h6 class="text-capitalize"><a href="ilan/<?php echo $ilan['slug']; ?>" class="link"><?php echo htmlspecialchars($ilan['baslik']); ?></a></h6>
                                             <ul class="meta-list">
                                                 <li class="item">
                                                     <i class="icon icon-bed"></i>

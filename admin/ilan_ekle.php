@@ -1,6 +1,7 @@
 <?php
 require_once 'includes/database.php';
 require_once 'includes/auth.php';
+require_once '../includes/slug.php';
 
 $dirs = ['uploads', 'uploads/images', 'uploads/videos'];
 foreach($dirs as $dir) {
@@ -8,14 +9,18 @@ foreach($dirs as $dir) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $fields = ['baslik', 'durumu', 'aciklama', 'fiyat', 'portfoy_yoneticisi_id', 'il', 'ilce', 'mahalle', 'ilan_no', 'ilan_tarihi', 'emlak_tipi', 'm2_brut', 'm2_net', 'oda_sayisi', 'bina_yasi', 'bulundugu_kat', 'kat_sayisi', 'isitma', 'banyo_sayisi', 'mutfak', 'balkon', 'asansor', 'otopark', 'esyali', 'kullanim_durumu', 'site_icerisinde', 'site_adi', 'aidat', 'krediye_uygun', 'tapu_durumu', 'konum', 'harita_konumu'];
+    $fields = ['baslik', 'slug', 'durumu', 'aciklama', 'fiyat', 'portfoy_yoneticisi_id', 'il', 'ilce', 'mahalle', 'ilan_no', 'ilan_tarihi', 'emlak_tipi', 'm2_brut', 'm2_net', 'oda_sayisi', 'bina_yasi', 'bulundugu_kat', 'kat_sayisi', 'isitma', 'banyo_sayisi', 'mutfak', 'balkon', 'asansor', 'otopark', 'esyali', 'kullanim_durumu', 'site_icerisinde', 'site_adi', 'aidat', 'krediye_uygun', 'tapu_durumu', 'konum', 'harita_konumu'];
     
     $vals = [];
     foreach($fields as $f) {
+        if ($f == 'slug') continue;
         $val = $_POST[$f] ?? null;
         if($val === '') $val = null;
         $vals[$f] = $val;
     }
+    
+    // Slug oluştur
+    $vals['slug'] = createSlug($vals['baslik']);
 
     // Para formatını (örn: 1.450.000,50) veritabanına hazır hale gertir (1450000.50)
     foreach(['fiyat', 'aidat'] as $pa) {
