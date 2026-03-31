@@ -3519,6 +3519,7 @@ label {
 .wd-find-select .group-select .nice-select {
   padding: 14px 17px;
   border-radius: 0px;
+  min-width: 200px; /* Yaklaşık 40px daha geniş olması için eklendi */
 }
 .wd-find-select.style-2 {
   border-radius: 0px;
