@@ -237,7 +237,7 @@ require_once __DIR__ . '/includes/header.php';
                                     <div class="agent-info">
                                         <div class="avatar">
                                             <?php if(!empty($ilan['yonetici_gorsel'])): ?>
-                                                <img src="admin/uploads/<?php echo $ilan['yonetici_gorsel']; ?>" alt="agent">
+                                                <img src="admin/uploads/yoneticiler/<?php echo $ilan['yonetici_gorsel']; ?>" alt="agent">
                                             <?php else: ?>
                                                 <img src="https://ui-avatars.com/api/?name=<?php echo urlencode($ilan['yonetici_ad'] ?? 'Danışman'); ?>&background=random" alt="agent">
                                             <?php endif; ?>
