@@ -128,6 +128,33 @@ try {
     ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;");
     echo "<span style='color:green;'>✔ <b>sayfa_bloklari</b> tablosu hazır.</span><br>";
 
+    // 7. Site Ayarları Tablosu
+    $db->exec("CREATE TABLE IF NOT EXISTS site_ayarlari (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        site_baslik VARCHAR(255),
+        site_aciklama TEXT,
+        site_anahtar_kelimeler TEXT,
+        logo VARCHAR(255),
+        favicon VARCHAR(255),
+        google_analytics TEXT,
+        google_search_console TEXT,
+        iletisim_telefon VARCHAR(50),
+        iletisim_eposta VARCHAR(100),
+        iletisim_adres TEXT,
+        facebook VARCHAR(255),
+        instagram VARCHAR(255),
+        twitter VARCHAR(255),
+        linkedin VARCHAR(255)
+    ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;");
+    echo "<span style='color:green;'>✔ <b>site_ayarlari</b> tablosu hazır.</span><br>";
+
+    // Varsayılan Site Ayarlarını ekle
+    $check_settings = $db->query("SELECT id FROM site_ayarlari LIMIT 1");
+    if (!$check_settings->fetch()) {
+        $db->exec("INSERT INTO site_ayarlari (site_baslik, site_aciklama) VALUES ('Emlak Sitesi', 'En güncel ilanlar...') ");
+        echo "<span style='color:#e62236;'>ℹ Varsayılan site ayarları oluşturuldu.</span><br>";
+    }
+
     // Varsayılan Admini ekle
     $stmt = $db->prepare("SELECT id FROM admins WHERE username = 'admin'");
     $stmt->execute();
