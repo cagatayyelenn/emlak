@@ -77,12 +77,21 @@
                             </div>
                             <div class="col-lg-4 col-md-6">
                                 <div class="footer-cl-4">
-                                    <h6 class="text-white">E-Bülten</h6>
-                                    <p class="mt-10 text-variant-2">En yeni ilanlardan haberdar olmak için abone olun.</p>
-                                    <form class="mt-12 form-subscribe">
-                                        <input type="email" placeholder="E-posta adresiniz">
-                                        <button class="tf-btn primary">Abone Ol</button>
-                                    </form>
+                                    <h6 class="text-white">İletişim Bilgileri</h6>
+                                    <ul class="mt-10">
+                                        <li class="mt-12 d-flex align-items-center gap-8">
+                                            <i class="icon icon-mapPin"></i>
+                                            <p class="text-variant-2">Ressam Vecihi Bereketoğlu Sok. Fardan Apt. No:7 Caddebostan Kadıköy İstanbul</p>
+                                        </li>
+                                        <li class="mt-12 d-flex align-items-center gap-8">
+                                            <i class="icon icon-phone2"></i>
+                                            <p class="text-variant-2">+90532 063 34 17</p>
+                                        </li>
+                                        <li class="mt-12 d-flex align-items-center gap-8">
+                                            <i class="icon icon-mail"></i>
+                                            <p class="text-variant-2">info@maxwellemlak.com</p>
+                                        </li>
+                                    </ul>
                                 </div>
                             </div>
                         </div>
