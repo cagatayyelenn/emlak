@@ -89,11 +89,11 @@ require_once 'includes/header.php';
             style="background-color: #ff9f43 !important;">
             <div class="card-body p-4 d-flex justify-content-between">
                 <div>
-                    <h6 class="mb-2 fw-semibold">Portföy Yöneticileri</h6>
+                    <h6 class="mb-2 fw-semibold">Danışmanlar</h6>
                     <h3 class="mb-0 fw-bold"><?= $yonetici_sayisi ?></h3>
                     <small class="mt-3 d-block bg-white bg-opacity-25 px-2 py-1 rounded text-dark"
                         style="font-size:0.75rem;"><i class="fa-solid fa-users border-end border-dark pe-1 me-1"></i>
-                        Aktif Yönetici Kaydı</small>
+                        Aktif Danışman Kaydı</small>
                 </div>
                 <div class="bg-white text-warning rounded-circle d-flex align-items-center justify-content-center mt-2 shadow-sm"
                     style="width:40px; height:40px;">

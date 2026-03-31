@@ -19,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         if ($admin && password_verify($sifre, $admin['password'])) {
             $_SESSION['admin_id'] = $admin['id'];
-            $_SESSION['admin_isim'] = $admin['username'];
+            $_SESSION['admin_isim'] = !empty($admin['ad_soyad']) ? $admin['ad_soyad'] : $admin['username'];
             header("Location: index.php");
             exit;
         } else {
