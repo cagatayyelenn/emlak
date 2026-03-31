@@ -22,6 +22,7 @@ require_once __DIR__ . '/db.php';
     <link rel="stylesheet" href="css/swiper-bundle.min.css">
     <link rel="stylesheet" href="css/animate.css">
     <link rel="stylesheet" type="text/css" href="css/styles.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.css" />
 
     <!-- Favicon and Touch Icons  -->
     <?php if(!empty($site_set['favicon'])): ?>

@@ -121,6 +121,23 @@
     <script type="text/javascript" src="js/animation_heading.js"></script>
     <script type="text/javascript" src="js/lazysize.min.js"></script>
     <script type="text/javascript" src="js/main.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/3.5.7/jquery.fancybox.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $('[data-fancybox="gallery"]').fancybox({
+                loop: true,
+                buttons: [
+                    "zoom",
+                    "slideShow",
+                    "fullScreen",
+                    "download",
+                    "thumbs",
+                    "close"
+                ],
+                animationEffect: "zoom-in-out"
+            });
+        });
+    </script>
 
 </body>
 
