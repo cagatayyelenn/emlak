@@ -282,7 +282,7 @@ require_once __DIR__ . '/includes/header.php';
                             <div class="single-property-element single-property-desc">
                                 <h5 class="fw-6 title">İlan Açıklaması </h5>
                                 <p class="text-variant-1"><?php echo nl2br(htmlspecialchars($ilan['aciklama'])); ?></p>
-                                <a href="#" class="btn-view"><span class="text">View More</span> </a>
+                                <a href="#" class="btn-view"><span class="text">Daha Fazlası</span> </a>
                             </div>
                             <!-- İlan Açıklaması -->
 
@@ -390,7 +390,11 @@ require_once __DIR__ . '/includes/header.php';
                             <div class="single-property-element single-property-map">
                                 <h6 class="title fw-6">Konum</h6>
                                 <div class="map-box">
-                                     <?php echo $ilan['harita_konumu']; ?>
+                                    <iframe class="map"
+                                    src="<?php echo $ilan['harita_konumu']; ?>"
+                                    height="478" style="border:0;" allowfullscreen="" loading="lazy"
+                                    referrerpolicy="no-referrer-when-downgrade"></iframe> 
+                                     
                                 </div>
                             </div>
                             <?php endif; ?>
