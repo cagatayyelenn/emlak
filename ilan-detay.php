@@ -35,6 +35,18 @@ $medyalar = $medya_stmt->fetchAll(PDO::FETCH_ASSOC);
 
 $gorseller = array_filter($medyalar, function($m) { return $m['medya_tipi'] === 'gorsel'; });
 $videolar = array_filter($medyalar, function($m) { return in_array($m['medya_tipi'], ['video', 'video_url']); });
+
+// Diğer ilanlar için en son girilen 3 aktif ilanı çek (Mevcut ilanı hariç tut)
+$diger_ilanlar_stmt = $db->prepare("
+    SELECT i.*, y.ad_soyad as yonetici_ad 
+    FROM ilanlar i 
+    LEFT JOIN portfoy_yoneticileri y ON i.portfoy_yoneticisi_id = y.id 
+    WHERE i.yayin_durumu = 'Aktif' AND i.id != ?
+    ORDER BY i.id DESC 
+    LIMIT 3
+");
+$diger_ilanlar_stmt->execute([$ilan['id']]);
+$diger_ilanlar = $diger_ilanlar_stmt->fetchAll(PDO::FETCH_ASSOC);
 require_once __DIR__ . '/includes/header.php';
 ?>
             <style>
@@ -422,412 +434,73 @@ require_once __DIR__ . '/includes/header.php';
                     <div dir="ltr" class="wow fadeInUp swiper tf-sw-mobile" data-wow-delay=".2s" data-screen="767"
                         data-preview="1" data-space="15">
                         <div class="tf-layout-mobile-md xl-col-3 md-col-2 swiper-wrapper">
-                            <div class="swiper-slide">
-                                <div class="homelengo-box">
-                                    <div class="archive-top">
-                                        <a href="property-details-v1.html" class="images-group">
-                                            <div class="images-style">
-                                                <img class="lazyload" data-src="images/home/house-7.jpg"
-                                                    src="images/home/house-7.jpg" alt="img">
-                                            </div>
-                                            <div class="top">
-                                                <ul class="d-flex gap-6">
-                                                    <li class="flag-tag primary">Featured</li>
-                                                    <li class="flag-tag style-1">For Sale</li>
-                                                </ul>
-
-                                            </div>
-                                            <div class="bottom">
-                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M10 7C10 7.53043 9.78929 8.03914 9.41421 8.41421C9.03914 8.78929 8.53043 9 8 9C7.46957 9 6.96086 8.78929 6.58579 8.41421C6.21071 8.03914 6 7.53043 6 7C6 6.46957 6.21071 5.96086 6.58579 5.58579C6.96086 5.21071 7.46957 5 8 5C8.53043 5 9.03914 5.21071 9.41421 5.58579C9.78929 5.96086 10 6.46957 10 7Z"
-                                                        stroke="white" stroke-width="1.5" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                    <path
-                                                        d="M13 7C13 11.7613 8 14.5 8 14.5C8 14.5 3 11.7613 3 7C3 5.67392 3.52678 4.40215 4.46447 3.46447C5.40215 2.52678 6.67392 2 8 2C9.32608 2 10.5979 2.52678 11.5355 3.46447C12.4732 4.40215 13 5.67392 13 7Z"
-                                                        stroke="white" stroke-width="1.5" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                </svg>
-                                                145 Brooklyn Ave, Califonia, New York
-                                            </div>
-                                        </a>
-
-                                    </div>
-                                    <div class="archive-bottom">
-                                        <div class="content-top">
-                                            <h6 class="text-capitalize"><a href="property-details-v1.html" class="link">
-                                                    Casa Lomas de Machalí Machas</a></h6>
-                                            <ul class="meta-list">
-                                                <li class="item">
-                                                    <i class="icon icon-bed"></i>
-                                                    <span class="text-variant-1">Beds:</span>
-                                                    <span class="fw-6">3</span>
-                                                </li>
-                                                <li class="item">
-                                                    <i class="icon icon-bath"></i>
-                                                    <span class="text-variant-1">Baths:</span>
-                                                    <span class="fw-6">2</span>
-                                                </li>
-                                                <li class="item">
-                                                    <i class="icon icon-sqft"></i>
-                                                    <span class="text-variant-1">Sqft:</span>
-                                                    <span class="fw-6">1150</span>
-                                                </li>
-                                            </ul>
-
-                                        </div>
-
-                                        <div class="content-bottom">
-                                            <div class="d-flex gap-8 align-items-center">
-                                                <div class="avatar avt-40 round">
-                                                    <img src="images/avatar/avt-png1.png" alt="avt">
-                                                </div>
-                                                <span>Arlene McCoy</span>
-                                            </div>
-                                            <h6 class="price">$7250,00</h6>
-                                        </div>
-                                    </div>
+                            <?php if (empty($diger_ilanlar)): ?>
+                                <div class="col-12 text-center py-5">
+                                    <p class="text-muted">Başka ilan bulunamadı.</p>
                                 </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="homelengo-box">
-                                    <div class="archive-top">
-                                        <a href="property-details-v1.html" class="images-group">
-                                            <div class="images-style">
-                                                <img class="lazyload" data-src="images/home/house-8.jpg"
-                                                    src="images/home/house-8.jpg" alt="img">
+                            <?php else: ?>
+                                <?php foreach ($diger_ilanlar as $di): ?>
+                                    <div class="swiper-slide">
+                                        <div class="homelengo-box">
+                                            <div class="archive-top">
+                                                <a href="ilan/<?php echo $di['slug']; ?>" class="images-group">
+                                                    <div class="images-style">
+                                                        <?php if (!empty($di['vitrin_gorseli'])): ?>
+                                                            <img src="admin/uploads/images/<?php echo $di['vitrin_gorseli']; ?>" alt="img" class="lazyload">
+                                                        <?php else: ?>
+                                                            <img src="images/home/house-1.jpg" alt="img" class="lazyload">
+                                                        <?php endif; ?>
+                                                    </div>
+                                                    <div class="top">
+                                                        <ul class="d-flex gap-6">
+                                                            <li class="flag-tag primary"><?php echo htmlspecialchars($di['durumu']); ?></li>
+                                                            <li class="flag-tag style-1"><?php echo htmlspecialchars($di['emlak_tipi']); ?></li>
+                                                        </ul>
+                                                    </div>
+                                                    <div class="bottom">
+                                                        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M10 7C10 7.53043 9.78929 8.03914 9.41421 8.41421C9.03914 8.78929 8.53043 9 8 9C7.46957 9 6.96086 8.78929 6.58579 8.41421C6.21071 8.03914 6 7.53043 6 7C6 6.46957 6.21071 5.96086 6.58579 5.58579C6.96086 5.21071 7.46957 5 8 5C8.53043 5 9.03914 5.21071 9.41421 5.58579C9.78929 5.96086 10 6.46957 10 7Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                                            <path d="M13 7C13 11.7613 8 14.5 8 14.5C8 14.5 3 11.7613 3 7C3 5.67392 3.52678 4.40215 4.46447 3.46447C5.40215 2.52678 6.67392 2 8 2C9.32608 2 10.5979 2.52678 11.5355 3.46447C12.4732 4.40215 13 5.67392 13 7Z" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                                        </svg>
+                                                        <?php echo htmlspecialchars($di['il'] . ' / ' . $di['ilce']); ?>
+                                                    </div>
+                                                </a>
                                             </div>
-                                            <div class="top">
-                                                <ul class="d-flex gap-6">
-                                                    <li class="flag-tag primary">Featured</li>
-                                                    <li class="flag-tag style-1">For Sale</li>
-                                                </ul>
-
-                                            </div>
-                                            <div class="bottom">
-                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M10 7C10 7.53043 9.78929 8.03914 9.41421 8.41421C9.03914 8.78929 8.53043 9 8 9C7.46957 9 6.96086 8.78929 6.58579 8.41421C6.21071 8.03914 6 7.53043 6 7C6 6.46957 6.21071 5.96086 6.58579 5.58579C6.96086 5.21071 7.46957 5 8 5C8.53043 5 9.03914 5.21071 9.41421 5.58579C9.78929 5.96086 10 6.46957 10 7Z"
-                                                        stroke="white" stroke-width="1.5" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                    <path
-                                                        d="M13 7C13 11.7613 8 14.5 8 14.5C8 14.5 3 11.7613 3 7C3 5.67392 3.52678 4.40215 4.46447 3.46447C5.40215 2.52678 6.67392 2 8 2C9.32608 2 10.5979 2.52678 11.5355 3.46447C12.4732 4.40215 13 5.67392 13 7Z"
-                                                        stroke="white" stroke-width="1.5" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                </svg>
-                                                145 Brooklyn Ave, Califonia, New York
-                                            </div>
-                                        </a>
-
-                                    </div>
-                                    <div class="archive-bottom">
-                                        <div class="content-top">
-                                            <h6 class="text-capitalize"><a href="property-details-v1.html" class="link">
-                                                    Casa Lomas de Machalí Machas</a></h6>
-                                            <ul class="meta-list">
-                                                <li class="item">
-                                                    <i class="icon icon-bed"></i>
-                                                    <span class="text-variant-1">Beds:</span>
-                                                    <span class="fw-6">3</span>
-                                                </li>
-                                                <li class="item">
-                                                    <i class="icon icon-bath"></i>
-                                                    <span class="text-variant-1">Baths:</span>
-                                                    <span class="fw-6">2</span>
-                                                </li>
-                                                <li class="item">
-                                                    <i class="icon icon-sqft"></i>
-                                                    <span class="text-variant-1">Sqft:</span>
-                                                    <span class="fw-6">1150</span>
-                                                </li>
-                                            </ul>
-
-                                        </div>
-
-                                        <div class="content-bottom">
-                                            <div class="d-flex gap-8 align-items-center">
-                                                <div class="avatar avt-40 round">
-                                                    <img src="images/avatar/avt-png2.png" alt="avt">
+                                            <div class="archive-bottom">
+                                                <div class="content-top">
+                                                    <h6 class="text-capitalize" style="height: 60px;"><a href="ilan/<?php echo $di['slug']; ?>" class="link"><?php echo htmlspecialchars($di['baslik']); ?></a></h6>
+                                                    <ul class="meta-list">
+                                                        <li class="item">
+                                                            <i class="icon icon-bed"></i>
+                                                            <span class="text-variant-1">Oda:</span>
+                                                            <span class="fw-6"><?php echo $di['oda_sayisi']; ?></span>
+                                                        </li>
+                                                        <li class="item">
+                                                            <i class="icon icon-bath"></i>
+                                                            <span class="text-variant-1">Banyo:</span>
+                                                            <span class="fw-6"><?php echo $di['banyo_sayisi']; ?></span>
+                                                        </li>
+                                                        <li class="item">
+                                                            <i class="icon icon-sqft"></i>
+                                                            <span class="text-variant-1">m²:</span>
+                                                            <span class="fw-6"><?php echo $di['m2_brut']; ?></span>
+                                                        </li>
+                                                    </ul>
                                                 </div>
-                                                <span>Arlene McCoy</span>
-                                            </div>
-                                            <h6 class="price">$7250,00</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="homelengo-box">
-                                    <div class="archive-top">
-                                        <a href="property-details-v1.html" class="images-group">
-                                            <div class="images-style">
-                                                <img class="lazyload" data-src="images/home/house-9.jpg"
-                                                    src="images/home/house-9.jpg" alt="img">
-                                            </div>
-                                            <div class="top">
-                                                <ul class="d-flex gap-6">
-                                                    <li class="flag-tag primary">Featured</li>
-                                                    <li class="flag-tag style-1">For Sale</li>
-                                                </ul>
-
-                                            </div>
-                                            <div class="bottom">
-                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M10 7C10 7.53043 9.78929 8.03914 9.41421 8.41421C9.03914 8.78929 8.53043 9 8 9C7.46957 9 6.96086 8.78929 6.58579 8.41421C6.21071 8.03914 6 7.53043 6 7C6 6.46957 6.21071 5.96086 6.58579 5.58579C6.96086 5.21071 7.46957 5 8 5C8.53043 5 9.03914 5.21071 9.41421 5.58579C9.78929 5.96086 10 6.46957 10 7Z"
-                                                        stroke="white" stroke-width="1.5" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                    <path
-                                                        d="M13 7C13 11.7613 8 14.5 8 14.5C8 14.5 3 11.7613 3 7C3 5.67392 3.52678 4.40215 4.46447 3.46447C5.40215 2.52678 6.67392 2 8 2C9.32608 2 10.5979 2.52678 11.5355 3.46447C12.4732 4.40215 13 5.67392 13 7Z"
-                                                        stroke="white" stroke-width="1.5" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                </svg>
-                                                145 Brooklyn Ave, Califonia, New York
-                                            </div>
-                                        </a>
-
-                                    </div>
-                                    <div class="archive-bottom">
-                                        <div class="content-top">
-                                            <h6 class="text-capitalize"><a href="property-details-v1.html" class="link">
-                                                    Casa Lomas de Machalí Machas</a></h6>
-                                            <ul class="meta-list">
-                                                <li class="item">
-                                                    <i class="icon icon-bed"></i>
-                                                    <span class="text-variant-1">Beds:</span>
-                                                    <span class="fw-6">3</span>
-                                                </li>
-                                                <li class="item">
-                                                    <i class="icon icon-bath"></i>
-                                                    <span class="text-variant-1">Baths:</span>
-                                                    <span class="fw-6">2</span>
-                                                </li>
-                                                <li class="item">
-                                                    <i class="icon icon-sqft"></i>
-                                                    <span class="text-variant-1">Sqft:</span>
-                                                    <span class="fw-6">1150</span>
-                                                </li>
-                                            </ul>
-
-                                        </div>
-
-                                        <div class="content-bottom">
-                                            <div class="d-flex gap-8 align-items-center">
-                                                <div class="avatar avt-40 round">
-                                                    <img src="images/avatar/avt-png3.png" alt="avt">
+                                                <div class="content-bottom">
+                                                    <div class="d-flex gap-8 align-items-center">
+                                                        <div class="avatar avt-40 round">
+                                                            <img src="https://ui-avatars.com/api/?name=<?php echo urlencode($di['yonetici_ad'] ?? 'Emlak'); ?>&background=random" alt="avt">
+                                                        </div>
+                                                        <span><?php echo htmlspecialchars($di['yonetici_ad'] ?? 'Maxwell Emlak'); ?></span>
+                                                    </div>
+                                                    <h6 class="price"><?php echo number_format($di['fiyat'], 0, ',', '.'); ?> ₺</h6>
                                                 </div>
-                                                <span>Arlene McCoy</span>
                                             </div>
-                                            <h6 class="price">$7250,00</h6>
                                         </div>
                                     </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="homelengo-box">
-                                    <div class="archive-top">
-                                        <a href="property-details-v1.html" class="images-group">
-                                            <div class="images-style">
-                                                <img class="lazyload" data-src="images/home/house-10.jpg"
-                                                    src="images/home/house-10.jpg" alt="img">
-                                            </div>
-                                            <div class="top">
-                                                <ul class="d-flex gap-6">
-                                                    <li class="flag-tag primary">Featured</li>
-                                                    <li class="flag-tag style-1">For Sale</li>
-                                                </ul>
-
-                                            </div>
-                                            <div class="bottom">
-                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M10 7C10 7.53043 9.78929 8.03914 9.41421 8.41421C9.03914 8.78929 8.53043 9 8 9C7.46957 9 6.96086 8.78929 6.58579 8.41421C6.21071 8.03914 6 7.53043 6 7C6 6.46957 6.21071 5.96086 6.58579 5.58579C6.96086 5.21071 7.46957 5 8 5C8.53043 5 9.03914 5.21071 9.41421 5.58579C9.78929 5.96086 10 6.46957 10 7Z"
-                                                        stroke="white" stroke-width="1.5" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                    <path
-                                                        d="M13 7C13 11.7613 8 14.5 8 14.5C8 14.5 3 11.7613 3 7C3 5.67392 3.52678 4.40215 4.46447 3.46447C5.40215 2.52678 6.67392 2 8 2C9.32608 2 10.5979 2.52678 11.5355 3.46447C12.4732 4.40215 13 5.67392 13 7Z"
-                                                        stroke="white" stroke-width="1.5" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                </svg>
-                                                145 Brooklyn Ave, Califonia, New York
-                                            </div>
-                                        </a>
-
-                                    </div>
-                                    <div class="archive-bottom">
-                                        <div class="content-top">
-                                            <h6 class="text-capitalize"><a href="property-details-v1.html" class="link">
-                                                    Casa Lomas de Machalí Machas</a></h6>
-                                            <ul class="meta-list">
-                                                <li class="item">
-                                                    <i class="icon icon-bed"></i>
-                                                    <span class="text-variant-1">Beds:</span>
-                                                    <span class="fw-6">3</span>
-                                                </li>
-                                                <li class="item">
-                                                    <i class="icon icon-bath"></i>
-                                                    <span class="text-variant-1">Baths:</span>
-                                                    <span class="fw-6">2</span>
-                                                </li>
-                                                <li class="item">
-                                                    <i class="icon icon-sqft"></i>
-                                                    <span class="text-variant-1">Sqft:</span>
-                                                    <span class="fw-6">1150</span>
-                                                </li>
-                                            </ul>
-
-                                        </div>
-
-                                        <div class="content-bottom">
-                                            <div class="d-flex gap-8 align-items-center">
-                                                <div class="avatar avt-40 round">
-                                                    <img src="images/avatar/avt-png4.png" alt="avt">
-                                                </div>
-                                                <span>Arlene McCoy</span>
-                                            </div>
-                                            <h6 class="price">$7250,00</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="homelengo-box">
-                                    <div class="archive-top">
-                                        <a href="property-details-v1.html" class="images-group">
-                                            <div class="images-style">
-                                                <img class="lazyload" data-src="images/home/house-11.jpg"
-                                                    src="images/home/house-11.jpg" alt="img">
-                                            </div>
-                                            <div class="top">
-                                                <ul class="d-flex gap-6">
-                                                    <li class="flag-tag primary">Featured</li>
-                                                    <li class="flag-tag style-1">For Sale</li>
-                                                </ul>
-
-                                            </div>
-                                            <div class="bottom">
-                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M10 7C10 7.53043 9.78929 8.03914 9.41421 8.41421C9.03914 8.78929 8.53043 9 8 9C7.46957 9 6.96086 8.78929 6.58579 8.41421C6.21071 8.03914 6 7.53043 6 7C6 6.46957 6.21071 5.96086 6.58579 5.58579C6.96086 5.21071 7.46957 5 8 5C8.53043 5 9.03914 5.21071 9.41421 5.58579C9.78929 5.96086 10 6.46957 10 7Z"
-                                                        stroke="white" stroke-width="1.5" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                    <path
-                                                        d="M13 7C13 11.7613 8 14.5 8 14.5C8 14.5 3 11.7613 3 7C3 5.67392 3.52678 4.40215 4.46447 3.46447C5.40215 2.52678 6.67392 2 8 2C9.32608 2 10.5979 2.52678 11.5355 3.46447C12.4732 4.40215 13 5.67392 13 7Z"
-                                                        stroke="white" stroke-width="1.5" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                </svg>
-                                                145 Brooklyn Ave, Califonia, New York
-                                            </div>
-                                        </a>
-
-                                    </div>
-                                    <div class="archive-bottom">
-                                        <div class="content-top">
-                                            <h6 class="text-capitalize"><a href="property-details-v1.html" class="link">
-                                                    Casa Lomas de Machalí Machas</a></h6>
-                                            <ul class="meta-list">
-                                                <li class="item">
-                                                    <i class="icon icon-bed"></i>
-                                                    <span class="text-variant-1">Beds:</span>
-                                                    <span class="fw-6">3</span>
-                                                </li>
-                                                <li class="item">
-                                                    <i class="icon icon-bath"></i>
-                                                    <span class="text-variant-1">Baths:</span>
-                                                    <span class="fw-6">2</span>
-                                                </li>
-                                                <li class="item">
-                                                    <i class="icon icon-sqft"></i>
-                                                    <span class="text-variant-1">Sqft:</span>
-                                                    <span class="fw-6">1150</span>
-                                                </li>
-                                            </ul>
-
-                                        </div>
-
-                                        <div class="content-bottom">
-                                            <div class="d-flex gap-8 align-items-center">
-                                                <div class="avatar avt-40 round">
-                                                    <img src="images/avatar/avt-png5.png" alt="avt">
-                                                </div>
-                                                <span>Arlene McCoy</span>
-                                            </div>
-                                            <h6 class="price">$7250,00</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="homelengo-box">
-                                    <div class="archive-top">
-                                        <a href="property-details-v1.html" class="images-group">
-                                            <div class="images-style">
-                                                <img class="lazyload" data-src="images/home/house-12.jpg"
-                                                    src="images/home/house-12.jpg" alt="img">
-                                            </div>
-                                            <div class="top">
-                                                <ul class="d-flex gap-6">
-                                                    <li class="flag-tag primary">Featured</li>
-                                                    <li class="flag-tag style-1">For Sale</li>
-                                                </ul>
-                                            </div>
-                                            <div class="bottom">
-                                                <svg width="16" height="16" viewBox="0 0 16 16" fill="none"
-                                                    xmlns="http://www.w3.org/2000/svg">
-                                                    <path
-                                                        d="M10 7C10 7.53043 9.78929 8.03914 9.41421 8.41421C9.03914 8.78929 8.53043 9 8 9C7.46957 9 6.96086 8.78929 6.58579 8.41421C6.21071 8.03914 6 7.53043 6 7C6 6.46957 6.21071 5.96086 6.58579 5.58579C6.96086 5.21071 7.46957 5 8 5C8.53043 5 9.03914 5.21071 9.41421 5.58579C9.78929 5.96086 10 6.46957 10 7Z"
-                                                        stroke="white" stroke-width="1.5" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                    <path
-                                                        d="M13 7C13 11.7613 8 14.5 8 14.5C8 14.5 3 11.7613 3 7C3 5.67392 3.52678 4.40215 4.46447 3.46447C5.40215 2.52678 6.67392 2 8 2C9.32608 2 10.5979 2.52678 11.5355 3.46447C12.4732 4.40215 13 5.67392 13 7Z"
-                                                        stroke="white" stroke-width="1.5" stroke-linecap="round"
-                                                        stroke-linejoin="round" />
-                                                </svg>
-                                                145 Brooklyn Ave, Califonia, New York
-                                            </div>
-                                        </a>
-
-                                    </div>
-                                    <div class="archive-bottom">
-                                        <div class="content-top">
-                                            <h6 class="text-capitalize"><a href="property-details-v1.html" class="link">
-                                                    Casa Lomas de Machalí Machas</a></h6>
-                                            <ul class="meta-list">
-                                                <li class="item">
-                                                    <i class="icon icon-bed"></i>
-                                                    <span class="text-variant-1">Beds:</span>
-                                                    <span class="fw-6">3</span>
-                                                </li>
-                                                <li class="item">
-                                                    <i class="icon icon-bath"></i>
-                                                    <span class="text-variant-1">Baths:</span>
-                                                    <span class="fw-6">2</span>
-                                                </li>
-                                                <li class="item">
-                                                    <i class="icon icon-sqft"></i>
-                                                    <span class="text-variant-1">Sqft:</span>
-                                                    <span class="fw-6">1150</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-
-                                        <div class="content-bottom">
-                                            <div class="d-flex gap-8 align-items-center">
-                                                <div class="avatar avt-40 round">
-                                                    <img src="images/avatar/avt-png6.png" alt="avt">
-                                                </div>
-                                                <span>Arlene McCoy</span>
-                                            </div>
-                                            <h6 class="price">$7250,00</h6>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                                <?php endforeach; ?>
+                            <?php endif; ?>
                         </div>
                         <div class="sw-pagination sw-pagination-mb text-center d-md-none d-block"></div>
                         <div class="text-center sec-btn">
