@@ -314,12 +314,10 @@ require_once __DIR__ . '/includes/header.php';
                             <?php if (!empty($ilan['harita_konumu'])): ?>
                             <div class="single-property-element single-property-map">
                                 <h5 class="title fw-6">İlan Konumu</h5>
-                                <div class="map-container">
-                                    <?php echo $ilan['harita_konumu']; ?>
-                                </div>
-                                <style>
-                                    .map-container iframe { width: 100%; height: 478px; border: 0; border-radius: 12px; }
-                                </style>
+                                <iframe class="map"
+                                    src=" <?php echo $ilan['harita_konumu']; ?>"
+                                    height="478" style="border:0;" allowfullscreen="" loading="lazy"
+                                    referrerpolicy="no-referrer-when-downgrade"></iframe>                                
                             </div>
                             <?php endif; ?>
                             <!-- İlan Konumu -->
