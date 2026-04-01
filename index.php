@@ -2,15 +2,20 @@
 // index.php
 require_once __DIR__ . '/includes/db.php';
 
-// Öne çıkan ilanları çek (Son eklenen 6 ilan)
+// Öne çıkan ilanları çek (Son eklenen 12 ilan - Sekmeler için daha fazla veri)
 $ilan_stmt = $db->query("
     SELECT i.*, y.ad_soyad as yonetici_ad 
     FROM ilanlar i 
     LEFT JOIN portfoy_yoneticileri y ON i.portfoy_yoneticisi_id = y.id 
+    WHERE i.yayin_durumu = 'Aktif'
     ORDER BY i.id DESC 
-    LIMIT 6
+    LIMIT 12
 ");
 $ilanlar = $ilan_stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Mevcut emlak tiplerini çek (Sadece ilanı olanlar)
+$tipler_stmt = $db->query("SELECT DISTINCT emlak_tipi FROM ilanlar WHERE yayin_durumu = 'Aktif' AND emlak_tipi IS NOT NULL AND emlak_tipi != ''");
+$emlak_tipleri = $tipler_stmt->fetchAll(PDO::FETCH_COLUMN);
 
 require_once __DIR__ . '/includes/header.php';
 ?>
@@ -96,15 +101,27 @@ require_once __DIR__ . '/includes/header.php';
                         <div class="text-subtitle text-primary">Öne Çıkan Gayrimenkuller</div>
                         <h3 class="mt-4 title">Sizin İçin Önerilenler</h3>
                     </div>
-                    
+
+                    <!-- Filter Tabs -->
                     <div class="row mt-5">
+                        <div class="col-12">
+                            <div class="tab-filter-container d-flex justify-content-center flex-wrap gap-12">
+                                <button class="tab-filter-item active" data-filter="all">Tümü</button>
+                                <?php foreach($emlak_tipleri as $tip): ?>
+                                    <button class="tab-filter-item" data-filter="<?php echo htmlspecialchars($tip); ?>"><?php echo htmlspecialchars($tip); ?></button>
+                                <?php endforeach; ?>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row mt-4" id="property-list">
                         <?php if(empty($ilanlar)): ?>
                             <div class="col-12 text-center">
                                 <p class="text-muted">Henüz ilan eklenmemiş.</p>
                             </div>
                         <?php else: ?>
                             <?php foreach($ilanlar as $ilan): ?>
-                            <div class="col-xl-4 col-lg-6 col-md-6 mb-4">
+                            <div class="col-xl-4 col-lg-6 col-md-6 mb-4 property-card-item" data-type="<?php echo htmlspecialchars($ilan['emlak_tipi']); ?>">
                                 <div class="homelengo-box">
                                     <div class="archive-top">
                                         <a href="ilan/<?php echo $ilan['slug']; ?>" class="images-group">
@@ -170,6 +187,59 @@ require_once __DIR__ . '/includes/header.php';
             </section>
             <!-- End Recommended -->
 
+                       <!-- Service  -->
+            <section class="flat-section">
+                <div class="container">
+                    <div class="box-title text-center wow fadeInUp">
+                        <div class="text-subtitle text-primary">Our Services</div>
+                        <h3 class="mt-4 title">What We Do?</h3>
+                    </div>
+                    <div class="tf-grid-layout md-col-3 wow fadeInUp" data-wow-delay=".2s">
+                        <div class="box-service">
+                            <div class="image">
+                                <img class="lazyload" data-src="images/service/home-1.png"
+                                    src="images/service/home-1.png" alt="image-location">
+                            </div>
+                            <div class="content">
+                                <h5 class="title">Buy A New Home</h5>
+                                <p class="description">Discover your dream home effortlessly. Explore diverse properties
+                                    and expert guidance for a seamless buying experience.</p>
+                                <a href="ilanlar.html" class="tf-btn btn-line">Learn More <span
+                                        class="icon icon-arrow-right2"></span></a>
+                            </div>
+                        </div>
+                        <div class="box-service">
+                            <div class="image">
+                                <img class="lazyload" data-src="images/service/home-2.png"
+                                    src="images/service/home-2.png" alt="image-location">
+                            </div>
+                            <div class="content">
+                                <h5 class="title">Sell a home</h5>
+                                <p class="description">Sell confidently with expert guidance and effective strategies,
+                                    showcasing your property's best features for a successful sale.</p>
+                                <a href="ilanlar.html" class="tf-btn btn-line">Learn More <span
+                                        class="icon icon-arrow-right2"></span></a>
+                            </div>
+                        </div>
+                        <div class="box-service">
+                            <div class="image">
+                                <img class="lazyload" data-src="images/service/home-3.png"
+                                    src="images/service/home-3.png" alt="image-location">
+                            </div>
+                            <div class="content">
+                                <h5 class="title">Rent a home</h5>
+                                <p class="description">Discover your perfect rental effortlessly. Explore a diverse
+                                    variety of listings tailored precisely to suit your unique lifestyle needs.</p>
+                                <a href="ilanlar.html" class="tf-btn btn-line">Learn More <span
+                                        class="icon icon-arrow-right2"></span></a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+            <!-- End Service -->
+
             <!-- Branding Section -->
             <style>
                 .flat-section-branding { padding: 100px 0; background: #fff; overflow: hidden; }
@@ -195,6 +265,15 @@ require_once __DIR__ . '/includes/header.php';
                     .branding-title { font-size: 32px; }
                     .branding-footer-text { font-size: 18px; padding: 0 20px; }
                 }
+
+                /* Tab Filter Styles */
+                .tab-filter-container { margin-bottom: 20px; }
+                .tab-filter-item { border: none; background: #f7f7f7; color: #1a1a1a; padding: 12px 28px; border-radius: 100px; font-weight: 700; font-size: 14px; transition: all 0.3s ease; cursor: pointer; border: 1px solid transparent; }
+                .tab-filter-item:hover { background: #eee; }
+                .tab-filter-item.active { background: #4361ee; color: #fff; box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3); }
+                
+                .property-card-item { transition: all 0.4s ease; display: block; }
+                /* JS filters with display: none for better layout management instead of just opacity */
             </style>
 
             <section class="flat-section-branding">
@@ -223,3 +302,40 @@ require_once __DIR__ . '/includes/header.php';
             </section>
 
 <?php require_once __DIR__ . '/includes/footer.php'; ?>
+
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+    const filterBtns = document.querySelectorAll('.tab-filter-item');
+    const propertyCards = document.querySelectorAll('.property-card-item');
+
+    filterBtns.forEach(btn => {
+        btn.addEventListener('click', function() {
+            // Buton aktiflik durumunu güncelle
+            filterBtns.forEach(b => b.classList.remove('active'));
+            this.classList.add('active');
+
+            const filterValue = this.getAttribute('data-filter');
+
+            // Kartları filtrele
+            propertyCards.forEach(card => {
+                const cardType = card.getAttribute('data-type');
+                
+                if (filterValue === 'all' || cardType === filterValue) {
+                    card.style.display = 'block';
+                    // Küçük bir gecikme ile opaklık animasyonu verilebilir
+                    setTimeout(() => {
+                        card.style.opacity = '1';
+                        card.style.transform = 'scale(1)';
+                    }, 10);
+                } else {
+                    card.style.opacity = '0';
+                    card.style.transform = 'scale(0.95)';
+                    setTimeout(() => {
+                        card.style.display = 'none';
+                    }, 400); // CSS transition süresiyle uyumlu
+                }
+            });
+        });
+    });
+});
+</script>
