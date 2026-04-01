@@ -77,64 +77,32 @@ require_once __DIR__ . '/includes/header.php';
                     <a href="ilanlar.php?tip=<?php echo urlencode($ilan['emlak_tipi']); ?>"><?php echo htmlspecialchars($ilan['emlak_tipi']); ?></a> <span>/</span> 
                     <b><?php echo htmlspecialchars($ilan['baslik']); ?></b>
                 </div>
-            <div class="flat-section-v4">
-                <div class="container">
-                    <div class="header-property-detail">
-                        <div class="content-top d-flex justify-content-between align-items-center">
-                            <h2 class="title link fw-8"><?php echo htmlspecialchars($ilan['baslik']); ?></h2>
-                            <div class="box-price d-flex align-items-end">
-                                <h3 class="fw-8"><?php echo number_format($ilan['fiyat'], 0, ',', '.'); ?> ₺</h3>
-                                 
-                            </div>
-                        </div>
-                        <div class="content-bottom">
-                            <div class="box-left"> 
-                                <div class="info-box">
-                                    <div class="label">Adres</div>
-                                    <p class="meta-item">
-                                        <span class="icon icon-mapPin"></span>
-                                        <span class="text-variant-1"><?php echo htmlspecialchars($ilan['ilce'] . ', ' . $ilan['il'] . ', Türkiye'); ?>k</span>
-                                         
-                                    </p>
+                <div class="flat-section-v4">
+                    <div class="container">
+                        <div class="header-property-detail">
+                            <div class="content-top d-flex justify-content-between align-items-center">
+                                <h2 class="title link fw-8"><?php echo htmlspecialchars($ilan['baslik']); ?></h2>
+                                <div class="box-price d-flex align-items-end">
+                                    <h3 class="fw-8"><?php echo number_format($ilan['fiyat'], 0, ',', '.'); ?> ₺</h3>
+                                    
                                 </div>
                             </div>
-
-                            <ul class="icon-box">
-                                <li><a href="#" class="item">
-                                        Haritada Gör
-
-                                    </a></li>
-                                 
-                                 
-
-                            </ul>
-
-                        </div>
-                    </div>
-                </div>
-            </div>
-                <div class="header-property-custom">
-                    <div class="row align-items-end">
-                        <div class="col-lg-8">
-                            <div class="title-area">
-                                <h2><?php echo htmlspecialchars($ilan['baslik']); ?></h2>
-                                <div class="location">
-                                    <i class="fa-solid fa-location-dot"></i>
-                                    <?php echo htmlspecialchars($ilan['ilce'] . ', ' . $ilan['il'] . ', Türkiye'); ?>
-                                    <a href="#map-section">Haritada Gör</a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4">
-                            <div class="price-area-custom">
-                                <div class="price"><?php echo number_format($ilan['fiyat'], 0, ',', '.'); ?> ₺</div>
-                                <?php if($ilan['m2_brut'] > 0): ?>
-                                    <div class="price-sqft"><?php echo number_format($ilan['fiyat'] / $ilan['m2_brut'], 0, ',', '.'); ?> ₺ / m²</div>
-                                <?php endif; ?>
+                            <div class="content-bottom">
+                                <div class="box-left"> 
+                                    <div class="info-box">
+                                        <div class="label">Adres</div>
+                                        <p class="meta-item">
+                                            <span class="icon icon-mapPin"></span>
+                                            <span class="text-variant-1"><?php echo htmlspecialchars($ilan['ilce'] . ', ' . $ilan['il'] . ', Türkiye'); ?>k</span>
+                                            
+                                        </p>
+                                    </div>
+                                </div> 
                             </div>
                         </div>
                     </div>
                 </div>
+                 
 
                 <section class="gallery-grid-v2">
                     <?php 
