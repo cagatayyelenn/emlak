@@ -7,11 +7,10 @@ require_once __DIR__ . '/includes/header.php';
     <div class="container">
         <div class="breadcrumb-content">
             <ul class="breadcrumb">
-                <li><a href="index.html" class="text-white">Home</a></li>
-                <li class="text-white">/ Pages</li>
-                <li class="text-white">/ Contact Us</li>
+                <li><a href="index.php" class="text-white">Anasayfa</a></li>
+                <li class="text-white">/ İletişim</li>
             </ul>
-            <h1 class="text-center text-white title">Contact Us</h1>
+            <h1 class="text-center text-white title">Bize Ulaşın</h1>
         </div>
     </div>
 </section>
@@ -21,51 +20,51 @@ require_once __DIR__ . '/includes/header.php';
         <div class="row">
             <div class="col-lg-8">
                 <div class="contact-content">
-                    <h4>Drop Us A Line</h4>
-                    <p class="body-2 text-variant-1">Feel free to connect with us through our online
-                        channels for updates, news, and more.</p>
+                    <h4>Bize bir mesaj bırakın.</h4>
+                    <p class="body-2 text-variant-1">Eviniz ve arsanızla ilgili alım-satım ve kiralama için bizimle
+                        iletişime geçebilirsiniz.</p>
                     <form id="contactform" method="post" action="./contact/contact-process.php" class="form-contact">
                         <div class="box grid-2">
                             <fieldset>
-                                <label for="name">Full Name:</label>
-                                <input type="text" class="form-control" placeholder="Your name" name="name" id="name"
-                                    required>
+                                <label for="name">Adınız ve Soyadınız:</label>
+                                <input type="text" class="form-control" placeholder="Adınız ve Soyadınız" name="name"
+                                    id="name" required>
                             </fieldset>
                             <fieldset>
-                                <label for="email">Email Address:</label>
-                                <input type="text" class="form-control" placeholder="Email" name="email" id="email"
-                                    required>
+                                <label for="email">Mail Adresiniz:</label>
+                                <input type="text" class="form-control" placeholder="Mail Adresiniz" name="email"
+                                    id="email" required>
                             </fieldset>
                         </div>
                         <div class="box grid-2">
                             <fieldset>
-                                <label for="phone">Phone Numbers:</label>
-                                <input type="text" class="form-control style-1" placeholder="ex 012345678" name="phone"
-                                    id="phone" required>
+                                <label for="phone">Telefon Numaranız:</label>
+                                <input type="text" class="form-control style-1" placeholder="ex 0555 555 55 55"
+                                    name="phone" id="phone" required>
                             </fieldset>
                             <fieldset>
-                                <label for="subject">Subject:</label>
-                                <input type="text" class="form-control style-1" placeholder="Enter Keyword"
+                                <label for="subject">Konu:</label>
+                                <input type="text" class="form-control style-1" placeholder="alım-Satım veya Kiralama"
                                     name="subject" id="subject">
                             </fieldset>
                         </div>
                         <fieldset>
-                            <label for="message">Your Message:</label>
-                            <textarea name="message" class="form-control" cols="30" rows="10" placeholder="Message"
+                            <label for="message">Mesajınız:</label>
+                            <textarea name="message" class="form-control" cols="30" rows="10" placeholder="Mesajınız"
                                 id="message" required></textarea>
                         </fieldset>
                         <div class="send-wrap">
-                            <button class="tf-btn primary size-1" type="submit">Send Message</button>
+                            <button class="tf-btn primary size-1" type="submit">Mail Gönder</button>
                         </div>
                     </form>
                 </div>
             </div>
             <div class="col-lg-4">
                 <div class="contact-info">
-                    <h4>Contact Us</h4>
+                    <h4>İletişim Bilgilerimiz</h4>
                     <ul>
                         <li class="box">
-                            <h6 class="title">Address:</h6>
+                            <h6 class="title">Adress:</h6>
                             <p class="text-variant-1">101 E 129th St, East Chicago, IN 46312
                                 <br> United States
                             </p>
@@ -75,13 +74,13 @@ require_once __DIR__ . '/includes/header.php';
                             <p class="text-variant-1">1-333-345-6868 <br> hi.themesflat@gmail.com</p>
                         </li>
                         <li class="box">
-                            <div class="title">Opentime:</div>
-                            <p class="text-variant-1">Monay - Friday: 08:00 - 20:00 <br> Saturday - Sunday:
-                                10:00 - 18:00</p>
+                            <div class="title">Çalışma Saatlerimniz:</div>
+                            <p class="text-variant-1">Pazartesi - Cumartesi: 09:00 - 17:00 <br> Pazar:
+                                Tatil (Telefon ve mail üzerinden iletişime geçebili )</p>
 
                         </li>
                         <li class="box">
-                            <div class="title">Follow Us:</div>
+                            <div class="title">Sosyal Medyalarımız:</div>
                             <ul class="box-social">
                                 <li><a href="#" class="item">
                                         <svg width="10" height="18" viewBox="0 0 10 18" fill="none"
@@ -145,11 +144,11 @@ require_once __DIR__ . '/includes/header.php';
         <div class="wrap-banner bg-primary-new">
             <div class="box-left">
                 <div class="box-title">
-                    <div class="text-subtitle text-primary">Become Partners</div>
-                    <h3 class="mt-4 fw-8">List your Properties on Homelengo, join Us Now!</h3>
+                    <div class="text-subtitle text-primary">Bizimle Çalışın</div>
+                    <h3 class="mt-4 fw-8">Alım-satım ve kiralama işlerinizde, hizmetinizdeyiz.</h3>
                 </div>
-                <a href="iletisim.html" class="tf-btn btn-view primary size-1 hover-btn-view">Become A
-                    Hosting <span class="icon icon-arrow-right2"></span></a>
+                <a href="iletisim.php" class="tf-btn btn-view primary size-1 hover-btn-view">İletişime Geçin <span
+                        class="icon icon-arrow-right2"></span></a>
             </div>
             <div class="box-right">
                 <img src="images/banner/banner.png" alt="image">

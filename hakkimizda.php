@@ -8,19 +8,20 @@ require_once __DIR__ . '/includes/header.php';
     <div class="container flat-header-wrapper-about">
         <div class="row justify-content-center">
             <div class="col-lg-8 text-center">
-                <h1 class="title">Welcome to the Hom Lengo</h1>
-                <p class="text-variant-1 desc">Welcome to Home Lengo, where we turn houses into homes and
-                    dreams into reality. At Home, we understand that a home is more than just a physical
-                    space, it's a place where memories are created, families grow, and life unfolds. </p>
+                <h1 class="title">Waxwell Emlak Ofisi</h1>
+                <p class="text-variant-1 desc">
+                    İstanbul’un her semtinde güvenilir ve şeffaf çözümler sunan Waxwell Emlak, hayalinizdeki yuvaya
+                    ulaşmanız için profesyonel danışmanlık sağlar. Sektör tecrübemiz ve geniş portföyümüzle, gayrimenkul
+                    yolculuğunuzun her adımında yanınızdayız. </p>
                 <div class="signature-box">
                     <div class="top">
-                        <h6>Leslie Alexander</h6>
-                        <p class="text-variant-2">CEO & founder</p>
+                        <h6>Maxwell Emlak Ofisi</h6>
+                        <p class="text-variant-2">İstanbul</p>
                     </div>
-                    <img src="images/banner/signature.png" alt="">
+
                 </div>
-                <a href="iletisim.html" class="tf-btn btn-view primary hover-btn-view">
-                    Contact us
+                <a href="ilanlar.php" class="tf-btn btn-view primary hover-btn-view">
+                    İlanlarımız
                     <span class="icon icon-arrow-right2"></span>
                 </a>
                 <div class="box-img item1 ani5">
@@ -46,7 +47,7 @@ require_once __DIR__ . '/includes/header.php';
                         </div>
                         <div class="tag-item ani5">
                             <i class="icon icon-check-circle"></i>
-                            <span>Proven Expertise</span>
+                            <span>Hızlı Alım Satım</span>
                         </div>
                     </div>
                     <div class="tf-image-wrap item-2">
@@ -56,11 +57,11 @@ require_once __DIR__ . '/includes/header.php';
                         </div>
                         <div class="tag-item tag-item-1 ani4">
                             <i class="icon icon-check-circle"></i>
-                            <span>Customized Solutions</span>
+                            <span>Güvenilir Kiralama</span>
                         </div>
                         <div class="tag-item tag-item-2 ani5">
                             <i class="icon icon-check-circle"></i>
-                            <span>Transparent Partnerships</span>
+                            <span>Şeffaf Hizmet</span>
                         </div>
                     </div>
                     <div class="tf-image-wrap item-3">
@@ -70,17 +71,16 @@ require_once __DIR__ . '/includes/header.php';
                         </div>
                         <div class="tag-item ani4">
                             <i class="icon icon-check-circle"></i>
-                            <span>Local Area Knowledge</span>
+                            <span>Geniş Portföy Yönetimi</span>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="content-right">
                 <div class="box-title wow fadeInUpSmall" data-wow-delay=".2s" data-wow-duration="2000ms">
-                    <div class="text-subtitle text-primary">Our Benifit</div>
-                    <h3 class="title mt-4">Discover what sets our Real Estate expertise apart</h3>
-                    <p class="desc text-variant-1">Our seasoned professionals, armed with extensive market
-                        knowledge, walk alongside you through every phase of your property endeavor.</p>
+                    <h3 class="title mt-4">Gayrimenkul uzmanlığımızı diğerlerinden ayıran özellikleri keşfedin.</h3>
+                    <p class="desc text-variant-1">Piyasa bilgisine sahip deneyimli profesyonellerimiz, gayrimenkul
+                        edinme sürecinizin her aşamasında size eşlik edecek.</p>
                 </div>
                 <div class="flat-service">
                     <a href="#" class="box-benefit hover-btn-view">
@@ -108,9 +108,9 @@ require_once __DIR__ . '/includes/header.php';
                             </span>
                         </div>
                         <div class="content">
-                            <h5 class="title">Buy A New Home</h5>
-                            <p class="description">Explore diverse properties and expert guidance for a
-                                seamless buying experience.</p>
+                            <h5 class="title">Evinizi Satın veya Kiralayın</h5>
+                            <p class="description">Gayrimenkulünüzü doğru fiyata, hızlı ve profesyonel süreçlerle
+                                değerlendirelim.</p>
                             <span class="btn-view style-1"><span class="text">Explore Now</span> <span
                                     class="icon icon-arrow-right2"></span> </span>
                         </div>
@@ -147,10 +147,10 @@ require_once __DIR__ . '/includes/header.php';
                             </span>
                         </div>
                         <div class="content">
-                            <h5 class="title">Rent a home</h5>
-                            <p class="description">Explore a diverse variety of listings tailored precisely
-                                to suit your unique lifestyle needs.</p>
-                            <span class="btn-view style-1"><span class="text">Explore Now</span> <span
+                            <h5 class="title">Bir Ev Satın Alın</h5>
+                            <p class="description">Hayalinizdeki yuvaya güvenle kavuşmanız için geniş portföyümüzle
+                                yanınızdayız.</p>
+                            <span class="btn-view style-1"><span class="text">ilanları İnceleyin</span> <span
                                     class="icon icon-arrow-right2"></span> </span>
 
                         </div>
@@ -187,9 +187,9 @@ require_once __DIR__ . '/includes/header.php';
                             </span>
                         </div>
                         <div class="content">
-                            <h5 class="title">Sell a home</h5>
-                            <p class="description">Showcasing your property's best features for a successful
-                                sale.</p>
+                            <h5 class="title">Bir Ev Kiralayın</h5>
+                            <p class="description">Yaşam tarzınıza en uygun kiralık seçenekleri İstanbul’un her semtinde
+                                keşfedin.</p>
                             <span class="btn-view style-1"><span class="text">Explore Now</span> <span
                                     class="icon icon-arrow-right2"></span> </span>
 
@@ -321,22 +321,6 @@ require_once __DIR__ . '/includes/header.php';
     </div>
 </section>
 
-<section class="flat-section pt-0 flat-banner wow fadeInUpSmall" data-wow-delay=".2s" data-wow-duration="2000ms">
-    <div class="container">
-        <div class="wrap-banner bg-primary-new">
-            <div class="box-left">
-                <div class="box-title">
-                    <div class="text-subtitle text-primary">Become Partners</div>
-                    <h3 class="mt-4 fw-8">List your Properties on Homelengo, join Us Now!</h3>
-                </div>
-                <a href="iletisim.html" class="tf-btn btn-view primary size-1 hover-btn-view">Become A
-                    Hosting <span class="icon icon-arrow-right2"></span></a>
-            </div>
-            <div class="box-right">
-                <img src="images/banner/banner.png" alt="image">
-            </div>
-        </div>
-    </div>
-</section>
+
 
 <?php require_once __DIR__ . '/includes/footer.php'; ?>
