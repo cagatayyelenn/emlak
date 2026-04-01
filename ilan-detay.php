@@ -237,44 +237,11 @@ require_once __DIR__ . '/includes/header.php';
                         </div>
 
                         <div class="col-xl-4 col-lg-5">
-                            <div class="widget-sidebar fixed-sidebar">
-                                <div class="widget-box widget-contact-agent">
-                                    <h6 class="title fw-6">Danışman Bilgileri</h6>
-                                    <div class="agent-info">
-                                        <div class="avatar">
-                                            <?php if(!empty($ilan['yonetici_gorsel'])): ?>
-                                                <img src="admin/uploads/yoneticiler/<?php echo $ilan['yonetici_gorsel']; ?>" alt="agent">
-                                            <?php else: ?>
-                                                <img src="https://ui-avatars.com/api/?name=<?php echo urlencode($ilan['yonetici_ad'] ?? 'Danışman'); ?>&background=random" alt="agent">
-                                            <?php endif; ?>
-                                        </div>
-                                        <div class="content">
-                                            <h6 class="fw-6"><?php echo htmlspecialchars($ilan['yonetici_ad'] ?? 'Maxwell Emlak'); ?></h6>
-                                            <p class="text-variant-1">Profesyonel Gayrimenkul Danışmanı</p>
-                                        </div>
-                                    </div>
-                                    <div class="contact-agent-info mt-4">
-                                        <a href="tel:<?php echo $ilan['yonetici_tel']; ?>" class="tf-btn primary w-100 mb-2">
-                                            <i class="icon icon-phone2"></i> <?php echo htmlspecialchars($ilan['yonetici_tel'] ?? $site_set['telefon']); ?>
-                                        </a>
-                                        <a href="mailto:<?php echo $ilan['yonetici_email']; ?>" class="tf-btn btn-line w-100 <?php echo !empty($ilan['sahibinden_link']) ? 'mb-2' : ''; ?>">
-                                            <i class="icon icon-mail"></i> <?php echo htmlspecialchars($ilan['yonetici_email'] ?? $site_set['iletisim_eposta']); ?>
-                                        </a>
-                                        <?php if(!empty($ilan['sahibinden_link'])): ?>
-                                            <a href="<?php echo $ilan['sahibinden_link']; ?>" target="_blank" class="tf-btn primary w-100" style="background-color: #ffdb00; color: #333; border-color: #ffdb00;">
-                                                Sahibinden'de Görüntüle
-                                            </a>
-                                        <?php endif; ?>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-xl-4 col-lg-5">
                             <div class="single-sidebar fixed-sidebar">
                                 <div class="widget-box single-property-contact">
-                                    <h5 class="title fw-6">Contact Sellers</h5>
+                                    <h5 class="title fw-6">İlan Danışman Bilgileri</h5>
                                     <div class="box-avatar">
-                                        <div class="avatar avt-100 round">
+                                        <div class="avatar avt-100 round" style="    border-radius: 50%;">
                                            <?php if(!empty($ilan['yonetici_gorsel'])): ?>
                                                 <img src="admin/uploads/yoneticiler/<?php echo $ilan['yonetici_gorsel']; ?>" alt="agent">
                                             <?php else: ?>
@@ -291,16 +258,19 @@ require_once __DIR__ . '/includes/header.php';
                                             </ul>
                                         </div>
                                     </div>
-                                    <div action="#" class="contact-form">
-                                        
+                                     <div class="contact-agent-info mt-4">
+                                        <a href="tel:<?php echo $ilan['yonetici_tel']; ?>" class="tf-btn primary w-100 mb-2">
+                                            <i class="icon icon-phone2"></i> <?php echo htmlspecialchars($ilan['yonetici_tel'] ?? $site_set['telefon']); ?>
+                                        </a>
+                                        <a href="mailto:<?php echo $ilan['yonetici_email']; ?>" class="tf-btn btn-line w-100 <?php echo !empty($ilan['sahibinden_link']) ? 'mb-2' : ''; ?>">
+                                            <i class="icon icon-mail"></i> <?php echo htmlspecialchars($ilan['yonetici_email'] ?? $site_set['iletisim_eposta']); ?>
+                                        </a>
                                         <?php if(!empty($ilan['sahibinden_link'])): ?>
                                             <a href="<?php echo $ilan['sahibinden_link']; ?>" target="_blank" class="tf-btn primary w-100" style="background-color: #ffdb00; color: #333; border-color: #ffdb00;">
                                                 Sahibinden'de Görüntüle
                                             </a>
                                         <?php endif; ?>
-                                        <button type="submit" class="tf-btn btn-view primary hover-btn-view w-100">Find
-                                            Properties <span class="icon icon-arrow-right2"></span></button>
-                                        </div>
+                                    </div>
                                 </div>
                                  
                                 <div class="widget-box single-property-whychoose">
