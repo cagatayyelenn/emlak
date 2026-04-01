@@ -137,16 +137,74 @@ require_once __DIR__ . '/includes/header.php';
                 <div class="container">
                     <div class="row">
                         <div class="col-xl-8 col-lg-7">
-                             
 
-                             <div class="single-property-element single-property-desc">
-                                <h5 class="fw-6 title">İlan Açıklaması </h5>
-                                <p class="text-variant-1"><?php echo nl2br(htmlspecialchars($ilan['aciklama'])); ?></p>
-                                 
-                                <a href="#" class="btn-view"><span class="text">View More</span> </a>
+                            <div class="single-property-element single-property-info">
+                                <h5 class="title fw-6">Property Details</h5>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <div class="inner-box">
+                                            <span class="label text-black-3">ID:</span>
+                                            <div class="content text-black-3">#1234</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="inner-box">
+                                            <span class="label text-black-3">Beds</span>
+                                            <div class="content text-black-3">7.328</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="inner-box">
+                                            <span class="label text-black-3">Price</span>
+                                            <div class="content text-black-3">$7,500</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="inner-box">
+                                            <span class="label text-black-3">Year built</span>
+                                            <div class="content text-black-3">2024</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="inner-box">
+                                            <span class="label text-black-3">Size</span>
+                                            <div class="content text-black-3">150 sqft</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="inner-box">
+                                            <span class="label text-black-3">Type</span>
+                                            <div class="content text-black-3">Villa</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="inner-box">
+                                            <span class="label text-black-3">Rooms</span>
+                                            <div class="content text-black-3">9</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="inner-box">
+                                            <span class="label text-black-3">Status</span>
+                                            <div class="content text-black-3">For sale</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="inner-box">
+                                            <span class="label text-black-3">Baths</span>
+                                            <div class="content text-black-3">3</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="inner-box">
+                                            <span class="label text-black-3">Garage</span>
+                                            <div class="content text-black-3">1</div>
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
-
-
+                             
                             <div class="single-property-element single-property-overview">
                                 <h6 class="title fw-6">Genel Bakış</h6>
                                 <ul class="info-box">
@@ -194,7 +252,6 @@ require_once __DIR__ . '/includes/header.php';
                                     </li>
                                 </ul>
                             </div>
-
                             <div class="single-property-element single-property-feature">
                                 <h6 class="title fw-6">İlan Detayları</h6>
                                 <div class="row">
@@ -231,6 +288,135 @@ require_once __DIR__ . '/includes/header.php';
                                         </ul>
                                     </div>
                                 </div>
+                            </div>
+
+                            <div class="single-property-element single-property-desc">
+                                <h5 class="fw-6 title">İlan Açıklaması </h5>
+                                <p class="text-variant-1"><?php echo nl2br(htmlspecialchars($ilan['aciklama'])); ?></p>
+                                <a href="#" class="btn-view"><span class="text">View More</span> </a>
+                            </div>
+
+                            <div class="single-property-element single-property-video">
+                                <h5 class="title fw-6">Video</h5>
+                                <div class="img-video">
+                                    <img src="images/banner/img-video.jpg" alt="img-video">
+                                    <a href="https://youtu.be/MLpWrANjFbI" data-fancybox="gallery2" class="btn-video">
+                                        <span class="icon icon-play"></span></a>
+                                </div>
+                            </div>
+
+                            <div class="single-property-element single-property-map">
+                                <h5 class="title fw-6">Map location</h5>
+                                <iframe class="map"
+                                    src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d135905.11693909427!2d-73.95165795400088!3d41.17584829642291!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2s!4v1727094281524!5m2!1sen!2s"
+                                    height="478" style="border:0;" allowfullscreen="" loading="lazy"
+                                    referrerpolicy="no-referrer-when-downgrade"></iframe>
+                                <div class="info-map">
+                                    <ul class="box-left">
+                                        <li>
+                                            <span class="label fw-6">Address</span>
+                                            <div class="text text-variant-1">150 sqft</div>
+                                        </li>
+                                        <li>
+                                            <span class="label fw-6">City</span>
+                                            <div class="text text-variant-1">#1234</div>
+                                        </li>
+                                        <li>
+                                            <span class="label fw-6">State/county</span>
+                                            <div class="text text-variant-1">$7,500</div>
+                                        </li>
+                                    </ul>
+                                    <ul class="box-right">
+                                        <li>
+                                            <span class="label fw-6">Postal code</span>
+                                            <div class="text text-variant-1">7.328</div>
+                                        </li>
+                                        <li>
+                                            <span class="label fw-6">Area</span>
+                                            <div class="text text-variant-1">7.328</div>
+                                        </li>
+                                        <li>
+                                            <span class="label fw-6">Country</span>
+                                            <div class="text text-variant-1">2024</div>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+
+                            <div class="single-property-element single-property-attachments">
+                                <h6 class="title fw-6">File Attachments</h6>
+                                <div class="row">
+                                    <div class="col-sm-6">
+                                        <a href="#" target="_blank" class="attachments-item">
+                                            <div class="box-icon w-60">
+                                                <img src="images/home/file-1.png" alt="file">
+                                            </div>
+                                            <span>Villa-Document.pdf</span>
+                                            <i class="icon icon-download"></i>
+                                        </a>
+                                    </div>
+                                    <div class="col-sm-6">
+                                        <a href="#" target="_blank" class="attachments-item">
+                                            <div class="box-icon w-60">
+                                                <img src="images/home/file-2.png" alt="file">
+                                            </div>
+                                            <span>Villa-Document.pdf</span>
+                                            <i class="icon icon-download"></i>
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="single-property-element single-property-nearby">
+                                <h5 class="title fw-6">What’s nearby?</h5>
+                                <p>Explore nearby amenities to precisely locate your property and identify surrounding
+                                    conveniences, providing a comprehensive overview of the living environment and the
+                                    property's convenience.</p>
+                                <div class="row box-nearby">
+                                    <div class="col-md-5">
+                                        <ul class="box-left">
+                                            <li class="item-nearby">
+                                                <span class="label">School:</span>
+                                                <span class="fw-7">0.7 km</span>
+                                            </li>
+                                            <li class="item-nearby">
+                                                <span class="label">University:</span>
+                                                <span class="fw-7">1.3 km</span>
+                                            </li>
+                                            <li class="item-nearby">
+                                                <span class="label">Grocery center:</span>
+                                                <span class="fw-7">0.6 km</span>
+                                            </li>
+                                            <li class="item-nearby">
+                                                <span class="label">Market:</span>
+                                                <span class="fw-7">1.1 km</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <ul class="box-right">
+                                            <li class="item-nearby">
+                                                <span class="label">Hospital:</span>
+                                                <span class="fw-7">0.4 km</span>
+                                            </li>
+                                            <li class="item-nearby">
+                                                <span class="label">Metro station:</span>
+                                                <span class="fw-7">1.8 km</span>
+                                            </li>
+                                            <li class="item-nearby">
+                                                <span class="label">Gym, wellness:</span>
+                                                <span class="fw-7">1.3 km</span>
+                                            </li>
+                                            <li class="item-nearby">
+                                                <span class="label">River:</span>
+                                                <span class="fw-7">2.1 km</span>
+                                            </li>
+                                        </ul>
+                                    </div>
+
+
+                                </div>
+
                             </div>
 
                             <?php if(!empty($ilan['harita_konumu'])): ?>
