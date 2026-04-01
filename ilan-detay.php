@@ -137,165 +137,156 @@ require_once __DIR__ . '/includes/header.php';
                 <div class="container">
                     <div class="row">
                         <div class="col-xl-8 col-lg-7">
-
+                            <!-- İlan Bilgileri -->
                             <div class="single-property-element single-property-info">
-                                <h5 class="title fw-6">Property Details</h5>
+                                <h5 class="title fw-6">İlan Bilgileri</h5>
                                 <div class="row">
                                     <div class="col-md-6">
                                         <div class="inner-box">
-                                            <span class="label text-black-3">ID:</span>
+                                            <span class="label text-black-3">İlan no:</span>
                                             <div class="content text-black-3">#1234</div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="inner-box">
-                                            <span class="label text-black-3">Beds</span>
+                                            <span class="label text-black-3">Emlak Tipi</span>
                                             <div class="content text-black-3">7.328</div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="inner-box">
-                                            <span class="label text-black-3">Price</span>
+                                            <span class="label text-black-3">Oda Sayısı</span>
                                             <div class="content text-black-3">$7,500</div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="inner-box">
-                                            <span class="label text-black-3">Year built</span>
+                                            <span class="label text-black-3">m² (Brüt)</span>
                                             <div class="content text-black-3">2024</div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="inner-box">
-                                            <span class="label text-black-3">Size</span>
+                                            <span class="label text-black-3">m² (Net)</span>
                                             <div class="content text-black-3">150 sqft</div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="inner-box">
-                                            <span class="label text-black-3">Type</span>
+                                            <span class="label text-black-3">Bina Yaşı</span>
                                             <div class="content text-black-3">Villa</div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="inner-box">
-                                            <span class="label text-black-3">Rooms</span>
+                                            <span class="label text-black-3">Bulunduğu Kat</span>
                                             <div class="content text-black-3">9</div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="inner-box">
-                                            <span class="label text-black-3">Status</span>
+                                            <span class="label text-black-3">Kat Sayısı</span>
                                             <div class="content text-black-3">For sale</div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="inner-box">
-                                            <span class="label text-black-3">Baths</span>
+                                            <span class="label text-black-3">Banyo Sayısı</span>
                                             <div class="content text-black-3">3</div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="inner-box">
-                                            <span class="label text-black-3">Garage</span>
+                                            <span class="label text-black-3">Isıtma</span>
+                                            <div class="content text-black-3">1</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="inner-box">
+                                            <span class="label text-black-3">Mutfak</span>
+                                            <div class="content text-black-3">For sale</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="inner-box">
+                                            <span class="label text-black-3">Balkon</span>
+                                            <div class="content text-black-3">3</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="inner-box">
+                                            <span class="label text-black-3">Otopark</span>
+                                            <div class="content text-black-3">1</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="inner-box">
+                                            <span class="label text-black-3">Eşyalı Mı?</span>
+                                            <div class="content text-black-3">1</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="inner-box">
+                                            <span class="label text-black-3">Asansör</span>
+                                            <div class="content text-black-3">1</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <div class="inner-box">
+                                            <span class="label text-black-3">Kullanım Durumu</span>
                                             <div class="content text-black-3">1</div>
                                         </div>
                                     </div>
 
-                                </div>
-                            </div>
-                             
-                            <div class="single-property-element single-property-overview">
-                                <h6 class="title fw-6">Genel Bakış</h6>
-                                <ul class="info-box">
-                                    <li class="item">
-                                        <a href="#" class="box-icon w-52"><i class="icon icon-house-line"></i></a>
-                                        <div class="content">
-                                            <span class="label">İlan No:</span>
-                                            <span><?php echo htmlspecialchars($ilan['ilan_no']); ?></span>
-                                        </div>
-                                    </li>
-                                    <li class="item">
-                                        <a href="#" class="box-icon w-52"><i class="icon icon-sliders-horizontal"></i></a>
-                                        <div class="content">
-                                            <span class="label">Emlak Tipi:</span>
-                                            <span><?php echo htmlspecialchars($ilan['emlak_tipi']); ?></span>
-                                        </div>
-                                    </li>
-                                    <li class="item">
-                                        <a href="#" class="box-icon w-52"><i class="icon icon-bed1"></i></a>
-                                        <div class="content">
-                                            <span class="label">Oda Sayısı:</span>
-                                            <span><?php echo htmlspecialchars($ilan['oda_sayisi']); ?></span>
-                                        </div>
-                                    </li>
-                                    <li class="item">
-                                        <a href="#" class="box-icon w-52"><i class="icon icon-bathtub"></i></a>
-                                        <div class="content">
-                                            <span class="label">Banyo Sayısı:</span>
-                                            <span><?php echo htmlspecialchars($ilan['banyo_sayisi']); ?></span>
-                                        </div>
-                                    </li>
-                                    <li class="item">
-                                        <a href="#" class="box-icon w-52"><i class="icon icon-crop"></i></a>
-                                        <div class="content">
-                                            <span class="label">Metrekare:</span>
-                                            <span><?php echo htmlspecialchars($ilan['m2_brut']); ?> m²</span>
-                                        </div>
-                                    </li>
-                                    <li class="item">
-                                        <a href="#" class="box-icon w-52"><i class="icon icon-hammer"></i></a>
-                                        <div class="content">
-                                            <span class="label">Bina Yaşı:</span>
-                                            <span><?php echo htmlspecialchars($ilan['bina_yasi']); ?></span>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="single-property-element single-property-feature">
-                                <h6 class="title fw-6">İlan Detayları</h6>
-                                <div class="row">
                                     <div class="col-md-6">
-                                        <ul class="list-feature">
-                                            <li class="item">
-                                                <span class="text-variant-1">Isıtma:</span>
-                                                <span class="fw-6"><?php echo htmlspecialchars($ilan['isitma']); ?></span>
-                                            </li>
-                                            <li class="item">
-                                                <span class="text-variant-1">Bulunduğu Kat:</span>
-                                                <span class="fw-6"><?php echo htmlspecialchars($ilan['bulundugu_kat']); ?></span>
-                                            </li>
-                                            <li class="item">
-                                                <span class="text-variant-1">Kat Sayısı:</span>
-                                                <span class="fw-6"><?php echo htmlspecialchars($ilan['kat_sayisi']); ?></span>
-                                            </li>
-                                        </ul>
+                                        <div class="inner-box">
+                                            <span class="label text-black-3">Krediye Uygun</span>
+                                            <div class="content text-black-3">1</div>
+                                        </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <ul class="list-feature">
-                                            <li class="item">
-                                                <span class="text-variant-1">Eşyalı:</span>
-                                                <span class="fw-6"><?php echo htmlspecialchars($ilan['esyali']); ?></span>
-                                            </li>
-                                            <li class="item">
-                                                <span class="text-variant-1">Krediye Uygun:</span>
-                                                <span class="fw-6"><?php echo htmlspecialchars($ilan['krediye_uygun']); ?></span>
-                                            </li>
-                                            <li class="item">
-                                                <span class="text-variant-1">Site İçerisinde:</span>
-                                                <span class="fw-6"><?php echo htmlspecialchars($ilan['site_icerisinde']); ?></span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
 
+                                    <div class="col-md-6">
+                                        <div class="inner-box">
+                                            <span class="label text-black-3">Tapu Durumu</span>
+                                            <div class="content text-black-3">1</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="inner-box">
+                                            <span class="label text-black-3">Site İçerisinde</span>
+                                            <div class="content text-black-3">1</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="inner-box">
+                                            <span class="label text-black-3">Site Adı</span>
+                                            <div class="content text-black-3">1</div>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                        <div class="inner-box">
+                                            <span class="label text-black-3">Aidat (₺)</span>
+                                            <div class="content text-black-3">1</div>
+                                        </div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <!-- İlan Bilgileri -->
+                            
+                            <!-- İlan Açıklaması -->
                             <div class="single-property-element single-property-desc">
                                 <h5 class="fw-6 title">İlan Açıklaması </h5>
                                 <p class="text-variant-1"><?php echo nl2br(htmlspecialchars($ilan['aciklama'])); ?></p>
                                 <a href="#" class="btn-view"><span class="text">View More</span> </a>
                             </div>
+                            <!-- İlan Açıklaması -->
 
+                            <!-- İlan Videosu -->
                             <div class="single-property-element single-property-video">
                                 <h5 class="title fw-6">Video</h5>
                                 <div class="img-video">
@@ -304,47 +295,21 @@ require_once __DIR__ . '/includes/header.php';
                                         <span class="icon icon-play"></span></a>
                                 </div>
                             </div>
-
+                            <!-- İlan Videosu -->
+                            
+                            <!-- İlan Konumu -->
                             <div class="single-property-element single-property-map">
-                                <h5 class="title fw-6">Map location</h5>
+                                <h5 class="title fw-6">İlan Konumu</h5>
                                 <iframe class="map"
                                     src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d135905.11693909427!2d-73.95165795400088!3d41.17584829642291!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2s!4v1727094281524!5m2!1sen!2s"
                                     height="478" style="border:0;" allowfullscreen="" loading="lazy"
-                                    referrerpolicy="no-referrer-when-downgrade"></iframe>
-                                <div class="info-map">
-                                    <ul class="box-left">
-                                        <li>
-                                            <span class="label fw-6">Address</span>
-                                            <div class="text text-variant-1">150 sqft</div>
-                                        </li>
-                                        <li>
-                                            <span class="label fw-6">City</span>
-                                            <div class="text text-variant-1">#1234</div>
-                                        </li>
-                                        <li>
-                                            <span class="label fw-6">State/county</span>
-                                            <div class="text text-variant-1">$7,500</div>
-                                        </li>
-                                    </ul>
-                                    <ul class="box-right">
-                                        <li>
-                                            <span class="label fw-6">Postal code</span>
-                                            <div class="text text-variant-1">7.328</div>
-                                        </li>
-                                        <li>
-                                            <span class="label fw-6">Area</span>
-                                            <div class="text text-variant-1">7.328</div>
-                                        </li>
-                                        <li>
-                                            <span class="label fw-6">Country</span>
-                                            <div class="text text-variant-1">2024</div>
-                                        </li>
-                                    </ul>
-                                </div>
+                                    referrerpolicy="no-referrer-when-downgrade"></iframe>                                
                             </div>
+                            <!-- İlan Konumu -->
 
+                            <!-- İlan Dosyalar -->
                             <div class="single-property-element single-property-attachments">
-                                <h6 class="title fw-6">File Attachments</h6>
+                                <h6 class="title fw-6">İlan İle İlgili Dosyalar</h6>
                                 <div class="row">
                                     <div class="col-sm-6">
                                         <a href="#" target="_blank" class="attachments-item">
@@ -366,12 +331,12 @@ require_once __DIR__ . '/includes/header.php';
                                     </div>
                                 </div>
                             </div>
+                            <!-- İlan Dosyalar -->
 
+                            <!-- İlan Yakınları -->
                             <div class="single-property-element single-property-nearby">
-                                <h5 class="title fw-6">What’s nearby?</h5>
-                                <p>Explore nearby amenities to precisely locate your property and identify surrounding
-                                    conveniences, providing a comprehensive overview of the living environment and the
-                                    property's convenience.</p>
+                                <h5 class="title fw-6">Yakında Neler Var </h5>
+                                <p>Yakındaki olanakları keşfederek ilanın yerini tam olarak belirleyin ve çevredeki imkanları tespit edin; böylece yaşam ortamı ve ilanın bulunduğu yerin, sunduğu olanaklar hakkında kapsamlı bir genel bakış elde edebilirsiniz.</p>
                                 <div class="row box-nearby">
                                     <div class="col-md-5">
                                         <ul class="box-left">
@@ -418,7 +383,9 @@ require_once __DIR__ . '/includes/header.php';
                                 </div>
 
                             </div>
+                            <!-- İlan Yakınları -->
 
+                             
                             <?php if(!empty($ilan['harita_konumu'])): ?>
                             <div class="single-property-element single-property-map">
                                 <h6 class="title fw-6">Konum</h6>
@@ -428,7 +395,7 @@ require_once __DIR__ . '/includes/header.php';
                             </div>
                             <?php endif; ?>
                         </div>
-
+                        <!-- İlan Danışmanı -->
                         <div class="col-xl-4 col-lg-5">
                             <div class="single-sidebar fixed-sidebar">
                                 <div class="widget-box single-property-contact">
@@ -494,6 +461,7 @@ require_once __DIR__ . '/includes/header.php';
                                  
                             </div>
                         </div>
+                        <!-- İlan Danışmanı -->
                     </div>
                 </div>
             </section>
