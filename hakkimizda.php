@@ -8,7 +8,7 @@ require_once __DIR__ . '/includes/header.php';
     <div class="container flat-header-wrapper-about">
         <div class="row justify-content-center">
             <div class="col-lg-8 text-center">
-                <h1 class="title">Waxwell Emlak Ofisi</h1>
+                <h1 class="title">Hakkımızda</h1>
                 <p class="text-variant-1 desc">
                     İstanbul’un her semtinde güvenilir ve şeffaf çözümler sunan Waxwell Emlak, hayalinizdeki yuvaya
                     ulaşmanız için profesyonel danışmanlık sağlar. Sektör tecrübemiz ve geniş portföyümüzle, gayrimenkul
@@ -83,7 +83,7 @@ require_once __DIR__ . '/includes/header.php';
                         edinme sürecinizin her aşamasında size eşlik edecek.</p>
                 </div>
                 <div class="flat-service">
-                    <a href="#" class="box-benefit hover-btn-view">
+                    <a href="ilanlar.php" class="box-benefit hover-btn-view">
                         <div class="icon-box">
                             <span class="icon">
                                 <svg width="60" height="60" viewBox="0 0 60 60" fill="none"
@@ -111,11 +111,11 @@ require_once __DIR__ . '/includes/header.php';
                             <h5 class="title">Evinizi Satın veya Kiralayın</h5>
                             <p class="description">Gayrimenkulünüzü doğru fiyata, hızlı ve profesyonel süreçlerle
                                 değerlendirelim.</p>
-                            <span class="btn-view style-1"><span class="text">Explore Now</span> <span
+                            <span class="btn-view style-1"><span class="text">İlanları İnceleyin</span> <span
                                     class="icon icon-arrow-right2"></span> </span>
                         </div>
                     </a>
-                    <a href="#" class="box-benefit hover-btn-view">
+                    <a href="ilanlar.php" class="box-benefit hover-btn-view">
                         <div class="icon-box">
                             <span class="icon">
                                 <svg width="60" height="60" viewBox="0 0 60 60" fill="none"
@@ -150,12 +150,12 @@ require_once __DIR__ . '/includes/header.php';
                             <h5 class="title">Bir Ev Satın Alın</h5>
                             <p class="description">Hayalinizdeki yuvaya güvenle kavuşmanız için geniş portföyümüzle
                                 yanınızdayız.</p>
-                            <span class="btn-view style-1"><span class="text">ilanları İnceleyin</span> <span
+                            <span class="btn-view style-1"><span class="text">İlanları İnceleyin</span> <span
                                     class="icon icon-arrow-right2"></span> </span>
 
                         </div>
                     </a>
-                    <a href="#" class="box-benefit hover-btn-view">
+                    <a href="ilanlar.php" class="box-benefit hover-btn-view">
                         <div class="icon-box">
                             <span class="icon">
                                 <svg width="60" height="60" viewBox="0 0 60 60" fill="none"
@@ -190,7 +190,7 @@ require_once __DIR__ . '/includes/header.php';
                             <h5 class="title">Bir Ev Kiralayın</h5>
                             <p class="description">Yaşam tarzınıza en uygun kiralık seçenekleri İstanbul’un her semtinde
                                 keşfedin.</p>
-                            <span class="btn-view style-1"><span class="text">Explore Now</span> <span
+                            <span class="btn-view style-1"><span class="text">İlanları İnceleyin</span> <span
                                     class="icon icon-arrow-right2"></span> </span>
 
                         </div>
