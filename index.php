@@ -456,12 +456,6 @@ require_once __DIR__ . '/includes/header.php';
                         <a href="#" class="box-img img-style">
                             <img class="lazyload" data-src="images/agents/agent-1.jpg" src="images/agents/agent-1.jpg"
                                 alt="image-agent">
-                            <ul class="agent-social">
-                                <li><span class="icon icon-facebook"></span></li>
-                                <li><span class="icon icon-x"></span></li>
-                                <li><span class="icon icon-linkedin"></span></li>
-                                <li><span class="icon icon-instargram"></span></li>
-                            </ul>
                         </a>
                         <div class="content">
                             <div class="info">
@@ -480,12 +474,7 @@ require_once __DIR__ . '/includes/header.php';
                         <a href="#" class="box-img img-style">
                             <img class="lazyload" data-src="images/agents/agent-2.jpg" src="images/agents/agent-2.jpg"
                                 alt="image-agent">
-                            <ul class="agent-social">
-                                <li><span class="icon icon-facebook"></span></li>
-                                <li><span class="icon icon-x"></span></li>
-                                <li><span class="icon icon-linkedin"></span></li>
-                                <li><span class="icon icon-instargram"></span></li>
-                            </ul>
+
                         </a>
                         <div class="content">
                             <div class="info">
@@ -505,12 +494,7 @@ require_once __DIR__ . '/includes/header.php';
                         <a href="#" class="box-img img-style">
                             <img class="lazyload" data-src="images/agents/agent-3.jpg" src="images/agents/agent-3.jpg"
                                 alt="image-agent">
-                            <ul class="agent-social">
-                                <li><span class="icon icon-facebook"></span></li>
-                                <li><span class="icon icon-x"></span></li>
-                                <li><span class="icon icon-linkedin"></span></li>
-                                <li><span class="icon icon-instargram"></span></li>
-                            </ul>
+
                         </a>
                         <div class="content">
                             <div class="info">
@@ -530,12 +514,7 @@ require_once __DIR__ . '/includes/header.php';
                         <a href="#" class="box-img img-style">
                             <img class="lazyload" data-src="images/agents/agent-4.jpg" src="images/agents/agent-4.jpg"
                                 alt="image-agent">
-                            <ul class="agent-social">
-                                <li><span class="icon icon-facebook"></span></li>
-                                <li><span class="icon icon-x"></span></li>
-                                <li><span class="icon icon-linkedin"></span></li>
-                                <li><span class="icon icon-instargram"></span></li>
-                            </ul>
+
                         </a>
                         <div class="content">
                             <div class="info">
