@@ -69,7 +69,7 @@ require_once __DIR__ . '/includes/header.php';
                 }
             </style>
 
-            <div class="container">
+            
                 <div class="property-breadcrumb">
                     <a href="index.php">Anasayfa</a> <span>/</span> 
                     <a href="ilanlar.php">İlanlar</a> <span>/</span> 
@@ -77,6 +77,7 @@ require_once __DIR__ . '/includes/header.php';
                     <a href="ilanlar.php?tip=<?php echo urlencode($ilan['emlak_tipi']); ?>"><?php echo htmlspecialchars($ilan['emlak_tipi']); ?></a> <span>/</span> 
                     <b><?php echo htmlspecialchars($ilan['baslik']); ?></b>
                 </div>
+                
                 <div class="flat-section-v4">
                     <div class="container">
                         <div class="header-property-detail">
@@ -131,7 +132,7 @@ require_once __DIR__ . '/includes/header.php';
                         <a href="<?php echo $img; ?>" data-fancybox="gallery" class="d-none"></a>
                     <?php endfor; ?>
                 </section>
-            </div>
+             
 
             <section class="flat-section-v3 flat-property-detail">
                 <div class="container">
