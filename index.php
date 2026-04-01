@@ -222,4 +222,32 @@ require_once __DIR__ . '/includes/header.php';
                 </div>
             </section>
 
-<?php require_once __DIR__ . '/includes/footer.php'; ?>
+            <!-- Footer Branding Section & Replacement -->
+            <style>
+                .footer-new { background-color: #141414; color: #fff; padding: 100px 0 30px; font-family: 'Inter', sans-serif; }
+                .newsletter-title { font-size: 36px; font-weight: 700; }
+                .newsletter-form { position: relative; width: 100%; border-bottom: 1px solid #444; padding-bottom: 5px; }
+                .newsletter-input { background: transparent; border: none; font-size: 20px; color: #fff; width: 100%; outline: none; }
+                .newsletter-btn { background: transparent; border: none; color: #fff; position: absolute; right: 0; font-size: 24px; }
+                
+                .contact-label { color: #888; font-size: 11px; letter-spacing: 1px; }
+                .contact-value { font-size: 16px; min-height: 48px; }
+                
+                .footer-menu-link, .footer-social-link { color: #fff; font-size: 32px; font-weight: 700; text-decoration: none; display: block; margin-bottom: 15px; transition: color 0.3s; }
+                .footer-social-link { font-size: 18px; font-weight: 600; margin-bottom: 10px; }
+                .footer-menu-link:hover, .footer-social-link:hover { color: #999; }
+
+                .huge-logo-container { width: 100%; margin-top: 40px; overflow: hidden; }
+                .huge-footer-logo { width: 100%; height: auto; display: block; object-fit: contain; transform: scale(1.1); margin-top: -50px; margin-bottom: -50px; pointer-events: none; }
+
+                .legal-links a { text-decoration: none; transition: color 0.3s; }
+                .legal-links a:hover { color: #fff; }
+
+                @media (max-width: 991px) {
+                    .newsletter-title { font-size: 28px; }
+                    .footer-menu-link { font-size: 24px; }
+                    .huge-footer-logo { margin-top: 0; margin-bottom: 0; transform: scale(1); }
+                }
+            </style>
+
+<?php require_once __DIR__ . '/includes/footer_new.php'; ?>
