@@ -170,4 +170,57 @@ require_once __DIR__ . '/includes/header.php';
             </section>
             <!-- End Recommended -->
 
+            <!-- Branding Section -->
+            <style>
+                .flat-section-branding { padding: 100px 0; background: #fff; overflow: hidden; }
+                .branding-title { font-size: 48px; font-weight: 400; color: #999; margin-bottom: 60px; text-align: center; font-family: 'Inter', sans-serif; }
+                .branding-title b { color: #1a1a1a; font-weight: 800; }
+                
+                .chevron-container { display: flex; justify-content: center; width: 100%; max-width: 1200px; margin: 0 auto; gap: 10px; }
+                .chevron-item { position: relative; width: 25%; height: 350px; overflow: hidden; transition: all 0.5s ease; }
+                .chevron-item img { width: 100%; height: 100%; object-fit: cover; filter: grayscale(100%); transition: filter 0.5s ease, transform 0.5s ease; }
+                .chevron-item:hover img { filter: grayscale(0%); transform: scale(1.1); }
+                
+                /* Chevron Shapes using clip-path */
+                .cv-1 { clip-path: polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%); }
+                .cv-2, .cv-3 { clip-path: polygon(15% 0, 85% 0, 100% 50%, 85% 100%, 15% 100%, 30% 50%); margin-left: -4%; }
+                .cv-4 { clip-path: polygon(15% 0, 100% 0, 100% 100%, 15% 100%, 30% 50%); margin-left: -4%; }
+
+                .branding-footer-text { max-width: 800px; margin: 60px auto 0; text-align: center; font-size: 24px; line-height: 1.5; color: #1a1a1a; font-weight: 600; }
+                .branding-footer-text .highlight { color: #999; font-weight: 500; }
+                .branding-footer-text b { font-weight: 800; }
+
+                @media (max-width: 991px) {
+                    .chevron-container { flex-direction: column; gap: 20px; height: auto; }
+                    .chevron-item { width: 100%; height: 250px; margin-left: 0 !important; clip-path: none !important; border-radius: 20px; }
+                    .branding-title { font-size: 32px; }
+                    .branding-footer-text { font-size: 18px; padding: 0 20px; }
+                }
+            </style>
+
+            <section class="flat-section-branding">
+                <div class="container">
+                    <h2 class="branding-title wow fadeInUp">Bu sadece gayrimenkulle ilgili <b>değil .</b></h2>
+                    
+                    <div class="chevron-container wow fadeInUp" data-wow-delay=".2s">
+                        <div class="chevron-item cv-1">
+                            <img src="images/branding/woman.png" alt="Identity">
+                        </div>
+                        <div class="chevron-item cv-2">
+                            <img src="images/branding/bedroom.png" alt="Progress">
+                        </div>
+                        <div class="chevron-item cv-3">
+                            <img src="images/branding/living_room.png" alt="Freedom">
+                        </div>
+                        <div class="chevron-item cv-4">
+                            <img src="images/branding/man.png" alt="Alignment">
+                        </div>
+                    </div>
+
+                    <div class="branding-footer-text wow fadeInUp" data-wow-delay=".4s">
+                        Bu, kimlikle ilgili. İlerlemeyle ilgili. Sıkışıp kaldığınız yerden kurtulmakla ilgili. Sadece bir yer aramıyorsunuz. <span class="highlight">Uyum arıyorsunuz. Biz de size bunu bulmanızda yardımcı oluyoruz.</span>
+                    </div>
+                </div>
+            </section>
+
 <?php require_once __DIR__ . '/includes/footer.php'; ?>
