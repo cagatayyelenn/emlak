@@ -412,12 +412,11 @@ require_once __DIR__ . '/includes/header.php';
                     </div>
                 </div>
             </section>
-            <section class="flat-section">
+            <section class="flat-section" style="   padding-top: 0px !important;">
                 <div class="container">
                     <div class="box-title">
-                        <div class="text-center wow fadeInUp">
-                            <div class="text-subtitle text-primary">Top Properties</div>
-                            <h3 class="title mt-4">Best Property Value</h3>
+                        <div class="text-center wow fadeInUp"> 
+                            <h3 class="title mt-4">Diğer İlanlarımız</h3>
                         </div>
                     </div>
                     <div dir="ltr" class="wow fadeInUp swiper tf-sw-mobile" data-wow-delay=".2s" data-screen="767"
@@ -832,8 +831,7 @@ require_once __DIR__ . '/includes/header.php';
                         </div>
                         <div class="sw-pagination sw-pagination-mb text-center d-md-none d-block"></div>
                         <div class="text-center sec-btn">
-                            <a href="ilanlar.html" class="tf-btn btn-view primary size-1 hover-btn-view">View All
-                                Properties <span class="icon icon-arrow-right2"></span></a>
+                            <a href="ilanlar.php" class="tf-btn btn-view primary size-1 hover-btn-view">Tüm İlanları Görüntüle <span class="icon icon-arrow-right2"></span></a>
                         </div>
                     </div>
                 </div>
