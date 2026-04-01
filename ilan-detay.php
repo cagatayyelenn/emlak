@@ -257,7 +257,11 @@ require_once __DIR__ . '/includes/header.php';
                                                         class="icon icon-mail"></i><?php echo htmlspecialchars($ilan['yonetici_email'] ?? $site_set['iletisim_eposta']); ?></li>
                                             </ul>
                                         </div>
-                                    </div>
+                                    </div> 
+                                </div>
+
+                                <div class="widget-box single-property-contact">
+                                    <h5 class="title fw-6">İlan İletişim Bilgileri</h5> 
                                      <div class="contact-agent-info mt-4">
                                         <a href="tel:<?php echo $ilan['yonetici_tel']; ?>" class="tf-btn primary w-100 mb-2">
                                             <i class="icon icon-phone2"></i> <?php echo htmlspecialchars($ilan['yonetici_tel'] ?? $site_set['telefon']); ?>
