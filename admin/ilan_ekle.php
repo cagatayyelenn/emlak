@@ -36,8 +36,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $columns = implode(', ', $fields);
             $placeholders = implode(', ', array_fill(0, count($fields), '?'));
             
+            // Sütun ve değer sıralamasını garantiye al
+            $vals_ordered = [];
+            foreach ($fields as $f) {
+                $vals_ordered[] = $vals[$f];
+            }
+
             $stmt = $db->prepare("INSERT INTO ilanlar ($columns) VALUES ($placeholders)");
-            $stmt->execute(array_values($vals));
+            $stmt->execute($vals_ordered);
             $ilan_id = $db->lastInsertId();
 
             $ana_gorsel_isim = $_POST['ana_gorsel_isim'] ?? '';
@@ -426,7 +432,10 @@ function validateStep3() {
 }
 
 // Son Form Gönderme Doğrulaması
+let formSubmitFlag = false;
 function validateForm(e) {
+    if (formSubmitFlag) return true; // Eğer zaten onaylandıysa devam et
+
     let baslik = document.getElementById('baslikInput').value;
     let fiyat = document.getElementById('fiyatInput').value;
     
@@ -435,7 +444,27 @@ function validateForm(e) {
         Swal.fire('Hata!', 'Zorunlu alanlar eksik. Lütfen geri dönüp bilgileri kontrol edin.', 'error');
         return false;
     }
-    return true;
+
+    e.preventDefault(); // İlk gönderimi durdur
+
+    // Yükleme göstergesini göster
+    Swal.fire({
+        title: 'Yükleniyor...',
+        text: 'Video ve görselleriniz sunucuya aktarılıyor. Lütfen bu işlem tamamlanana kadar sayfayı kapatmayın.',
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+
+    // Kısa bir bekleme sonrası formu gerçekten gönder
+    setTimeout(() => {
+        formSubmitFlag = true;
+        document.getElementById('ilanEkleForm').submit();
+    }, 100);
+
+    return false;
 }
 
 // Para Birimi Formatlayıcı (Thousands Separator)

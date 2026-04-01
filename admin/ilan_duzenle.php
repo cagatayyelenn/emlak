@@ -151,7 +151,7 @@ require_once 'includes/header.php';
     <div class="alert alert-info shadow-sm rounded-0 border-0 border-start border-5 border-info"><i class="fa-solid fa-star text-warning me-2"></i> İlanın Vitrin (Kapak) görseli başarıyla değiştirildi.</div>
 <?php endif; ?>
 
-<form action="ilan_duzenle.php?id=<?= $id ?>" method="POST" enctype="multipart/form-data">
+<form id="ilanDuzenleForm" action="ilan_duzenle.php?id=<?= $id ?>" method="POST" enctype="multipart/form-data" onsubmit="return handleDuzenleSubmit(event)">
     <div class="row">
         <!-- SOL FORM ALANI -->
         <div class="col-xl-8 col-lg-7">
@@ -502,6 +502,30 @@ document.getElementById('gorselInput').addEventListener('change', function(e) {
 
 <?php require_once 'includes/footer.php'; ?>
 <script>
+let formSubmitFlag = false;
+function handleDuzenleSubmit(e) {
+    if (formSubmitFlag) return true;
+    
+    e.preventDefault();
+
+    Swal.fire({
+        title: 'Yükleniyor...',
+        text: 'İlan bilgileri ve medyalarınız güncelleniyor. Lütfen bu işlem tamamlanana kadar sayfayı kapatmayın.',
+        allowOutsideClick: false,
+        showConfirmButton: false,
+        didOpen: () => {
+            Swal.showLoading();
+        }
+    });
+
+    setTimeout(() => {
+        formSubmitFlag = true;
+        document.getElementById('ilanDuzenleForm').submit();
+    }, 100);
+
+    return false;
+}
+
 // Para Birimi Formatlayıcı (Thousands Separator)
 document.querySelectorAll('.price-format').forEach(input => {
     input.addEventListener('input', function(e) {
