@@ -163,7 +163,8 @@ require_once __DIR__ . '/includes/header.php';
                             </div>
                             <div class="archive-bottom">
                                 <div class="content-top">
-                                    <h6 class="text-capitalize"><a href="ilan/<?php echo $ilan['slug']; ?>"
+                                    <h6 class="text-capitalize" style="height: 60px;"><a
+                                            href="ilan/<?php echo $ilan['slug']; ?>"
                                             class="link"><?php echo htmlspecialchars($ilan['baslik']); ?></a></h6>
                                     <ul class="meta-list">
                                         <li class="item">
