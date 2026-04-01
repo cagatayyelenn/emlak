@@ -182,9 +182,8 @@ require_once __DIR__ . '/includes/header.php';
                 .chevron-item:hover img { filter: grayscale(0%); transform: scale(1.1); }
                 
                 /* Chevron Shapes using clip-path */
-                .cv-1 { clip-path: polygon(0 0, 85% 0, 100% 50%, 85% 100%, 0 100%); }
-                .cv-2, .cv-3 { clip-path: polygon(15% 0, 85% 0, 100% 50%, 85% 100%, 15% 100%, 30% 50%); margin-left: -4%; }
-                .cv-4 { clip-path: polygon(15% 0, 100% 0, 100% 100%, 15% 100%, 30% 50%); margin-left: -4%; }
+                .chevron-item { clip-path: polygon(15% 0, 70% 0, 100% 50%, 70% 100%, 15% 100%, 50% 50%); margin-left: -8%; }
+                .chevron-item:first-child { margin-left: 0; }
 
                 .branding-footer-text { max-width: 800px; margin: 60px auto 0; text-align: center; font-size: 24px; line-height: 1.5; color: #1a1a1a; font-weight: 600; }
                 .branding-footer-text .highlight { color: #999; font-weight: 500; }
