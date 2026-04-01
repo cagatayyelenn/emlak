@@ -363,26 +363,27 @@ require_once __DIR__ . '/includes/header.php';
     }
 
     .tab-filter-item {
-        border: none;
-        background: #f7f7f7;
-        color: #1a1a1a;
+        border: 1px solid #000;
+        background: #000;
+        color: #fff;
         padding: 12px 28px;
-        border-radius: 100px;
+        border-radius: 0px;
         font-weight: 700;
         font-size: 14px;
         transition: all 0.3s ease;
         cursor: pointer;
-        border: 1px solid transparent;
     }
 
     .tab-filter-item:hover {
-        background: #eee;
+        background: #333;
+        color: #fff;
     }
 
     .tab-filter-item.active {
-        background: #4361ee;
-        color: #fff;
-        box-shadow: 0 4px 12px rgba(67, 97, 238, 0.3);
+        background: #fff;
+        color: #000;
+        box-shadow: none;
+        border: 1px solid #000;
     }
 
     .property-card-item {
