@@ -62,6 +62,12 @@ require_once __DIR__ . '/includes/header.php';
                 .show-all-overlay { position: absolute; bottom: 20px; right: 20px; background: white; padding: 10px 20px; border-radius: 12px; font-weight: 700; color: #1a1a1a; display: flex; align-items: center; gap: 10px; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.1); border: 1px solid #eee; z-index: 10; text-decoration: none; font-size: 14px; }
                 .show-all-overlay:hover { background: #f8f9fa; }
 
+                /* Read More styles */
+                .desc-content { max-height: 120px; overflow: hidden; position: relative; transition: max-height 0.5s ease; }
+                .desc-content.expanded { max-height: 2000px; }
+                .desc-content:not(.expanded)::after { content: ""; position: absolute; bottom: 0; left: 0; width: 100%; height: 50px; background: linear-gradient(transparent, #fff); pointer-events: none; }
+                .btn-view-toggle { cursor: pointer; display: inline-flex; align-items: center; gap: 5px; color: #4361ee; font-weight: 700; margin-top: 15px; }
+
                 @media (max-width: 991px) {
                     .gallery-grid-v2 { grid-template-columns: 1fr 1fr; grid-template-rows: 250px 150px; height: auto; }
                     .gallery-grid-v2 .item-main { grid-column: 1 / 3; grid-row: 1 / 2; }
@@ -144,170 +150,182 @@ require_once __DIR__ . '/includes/header.php';
                                     <div class="col-md-6">
                                         <div class="inner-box">
                                             <span class="label text-black-3">İlan no:</span>
-                                            <div class="content text-black-3">#1234</div>
+                                            <div class="content text-black-3">#<?php echo htmlspecialchars($ilan['ilan_no'] ?? ''); ?></div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="inner-box">
                                             <span class="label text-black-3">Emlak Tipi</span>
-                                            <div class="content text-black-3">7.328</div>
+                                            <div class="content text-black-3"><?php echo htmlspecialchars($ilan['emlak_tipi'] ?? ''); ?></div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="inner-box">
                                             <span class="label text-black-3">Oda Sayısı</span>
-                                            <div class="content text-black-3">$7,500</div>
+                                            <div class="content text-black-3"><?php echo htmlspecialchars($ilan['oda_sayisi'] ?? ''); ?></div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="inner-box">
                                             <span class="label text-black-3">m² (Brüt)</span>
-                                            <div class="content text-black-3">2024</div>
+                                            <div class="content text-black-3"><?php echo htmlspecialchars($ilan['m2_brut'] ?? ''); ?></div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="inner-box">
                                             <span class="label text-black-3">m² (Net)</span>
-                                            <div class="content text-black-3">150 sqft</div>
+                                            <div class="content text-black-3"><?php echo htmlspecialchars($ilan['m2_net'] ?? ''); ?></div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="inner-box">
                                             <span class="label text-black-3">Bina Yaşı</span>
-                                            <div class="content text-black-3">Villa</div>
+                                            <div class="content text-black-3"><?php echo htmlspecialchars($ilan['bina_yasi'] ?? ''); ?></div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="inner-box">
                                             <span class="label text-black-3">Bulunduğu Kat</span>
-                                            <div class="content text-black-3">9</div>
+                                            <div class="content text-black-3"><?php echo htmlspecialchars($ilan['bulundugu_kat'] ?? ''); ?></div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="inner-box">
                                             <span class="label text-black-3">Kat Sayısı</span>
-                                            <div class="content text-black-3">For sale</div>
+                                            <div class="content text-black-3"><?php echo htmlspecialchars($ilan['kat_sayisi'] ?? ''); ?></div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="inner-box">
                                             <span class="label text-black-3">Banyo Sayısı</span>
-                                            <div class="content text-black-3">3</div>
+                                            <div class="content text-black-3"><?php echo htmlspecialchars($ilan['banyo_sayisi'] ?? ''); ?></div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="inner-box">
                                             <span class="label text-black-3">Isıtma</span>
-                                            <div class="content text-black-3">1</div>
+                                            <div class="content text-black-3"><?php echo htmlspecialchars($ilan['isitma'] ?? ''); ?></div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="inner-box">
                                             <span class="label text-black-3">Mutfak</span>
-                                            <div class="content text-black-3">For sale</div>
+                                            <div class="content text-black-3"><?php echo htmlspecialchars($ilan['mutfak'] ?? ''); ?></div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="inner-box">
                                             <span class="label text-black-3">Balkon</span>
-                                            <div class="content text-black-3">3</div>
+                                            <div class="content text-black-3"><?php echo htmlspecialchars($ilan['balkon'] ?? ''); ?></div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="inner-box">
                                             <span class="label text-black-3">Otopark</span>
-                                            <div class="content text-black-3">1</div>
+                                            <div class="content text-black-3"><?php echo htmlspecialchars($ilan['otopark'] ?? ''); ?></div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="inner-box">
                                             <span class="label text-black-3">Eşyalı Mı?</span>
-                                            <div class="content text-black-3">1</div>
+                                            <div class="content text-black-3"><?php echo htmlspecialchars($ilan['esyali'] ?? ''); ?></div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="inner-box">
                                             <span class="label text-black-3">Asansör</span>
-                                            <div class="content text-black-3">1</div>
+                                            <div class="content text-black-3"><?php echo htmlspecialchars($ilan['asansor'] ?? ''); ?></div>
                                         </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="inner-box">
                                             <span class="label text-black-3">Kullanım Durumu</span>
-                                            <div class="content text-black-3">1</div>
+                                            <div class="content text-black-3"><?php echo htmlspecialchars($ilan['kullanim_durumu'] ?? ''); ?></div>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="inner-box">
                                             <span class="label text-black-3">Krediye Uygun</span>
-                                            <div class="content text-black-3">1</div>
+                                            <div class="content text-black-3"><?php echo htmlspecialchars($ilan['krediye_uygun'] ?? ''); ?></div>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="inner-box">
                                             <span class="label text-black-3">Tapu Durumu</span>
-                                            <div class="content text-black-3">1</div>
+                                            <div class="content text-black-3"><?php echo htmlspecialchars($ilan['tapu_durumu'] ?? ''); ?></div>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="inner-box">
                                             <span class="label text-black-3">Site İçerisinde</span>
-                                            <div class="content text-black-3">1</div>
+                                            <div class="content text-black-3"><?php echo htmlspecialchars($ilan['site_icerisinde'] ?? ''); ?></div>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="inner-box">
                                             <span class="label text-black-3">Site Adı</span>
-                                            <div class="content text-black-3">1</div>
+                                            <div class="content text-black-3"><?php echo htmlspecialchars($ilan['site_adi'] ?? ''); ?></div>
                                         </div>
                                     </div>
 
                                     <div class="col-md-6">
                                         <div class="inner-box">
                                             <span class="label text-black-3">Aidat (₺)</span>
-                                            <div class="content text-black-3">1</div>
+                                            <div class="content text-black-3"><?php echo number_format($ilan['aidat'] ?? 0, 0, ',', '.'); ?> ₺</div>
                                         </div>
                                     </div>
-
-
                                 </div>
                             </div>
                             <!-- İlan Bilgileri -->
                             
                             <!-- İlan Açıklaması -->
+                            <!-- İlan Açıklaması -->
                             <div class="single-property-element single-property-desc">
                                 <h5 class="fw-6 title">İlan Açıklaması </h5>
-                                <p class="text-variant-1"><?php echo nl2br(htmlspecialchars($ilan['aciklama'])); ?></p>
-                                <a href="#" class="btn-view"><span class="text">Daha Fazlası</span> </a>
+                                <div id="descContainer" class="desc-content">
+                                    <p class="text-variant-1"><?php echo nl2br(htmlspecialchars($ilan['aciklama'])); ?></p>
+                                </div>
+                                <a id="toggleDesc" class="btn-view-toggle"><span class="text">Daha Fazlası</span> </a>
                             </div>
                             <!-- İlan Açıklaması -->
 
                             <!-- İlan Videosu -->
+                            <?php if (count($videolar) > 0): ?>
                             <div class="single-property-element single-property-video">
                                 <h5 class="title fw-6">Video</h5>
                                 <div class="img-video">
+                                    <?php 
+                                    $video = reset($videolar); 
+                                    $video_src = ($video['medya_tipi'] === 'video_url') ? $video['dosya_yolu'] : 'admin/uploads/videos/' . $video['dosya_yolu'];
+                                    ?>
                                     <img src="images/banner/img-video.jpg" alt="img-video">
-                                    <a href="https://youtu.be/MLpWrANjFbI" data-fancybox="gallery2" class="btn-video">
+                                    <a href="<?php echo $video_src; ?>" data-fancybox="gallery2" class="btn-video">
                                         <span class="icon icon-play"></span></a>
                                 </div>
                             </div>
+                            <?php endif; ?>
                             <!-- İlan Videosu -->
                             
                             <!-- İlan Konumu -->
+                            <?php if (!empty($ilan['harita_konumu'])): ?>
                             <div class="single-property-element single-property-map">
                                 <h5 class="title fw-6">İlan Konumu</h5>
-                                <iframe class="map"
-                                    src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d135905.11693909427!2d-73.95165795400088!3d41.17584829642291!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2s!4v1727094281524!5m2!1sen!2s"
-                                    height="478" style="border:0;" allowfullscreen="" loading="lazy"
-                                    referrerpolicy="no-referrer-when-downgrade"></iframe>                                
+                                <div class="map-container">
+                                    <?php echo $ilan['harita_konumu']; ?>
+                                </div>
+                                <style>
+                                    .map-container iframe { width: 100%; height: 478px; border: 0; border-radius: 12px; }
+                                </style>
                             </div>
+                            <?php endif; ?>
                             <!-- İlan Konumu -->
 
-                            <!-- İlan Dosyalar -->
+                            <!-- İlan Dosyaları -->
+                            <?php if (!empty($ilan_dosyalari)): // Henüz veritabanında dosya alanı yok, bu yüzden gizli kalacak ?>
                             <div class="single-property-element single-property-attachments">
                                 <h6 class="title fw-6">İlan İle İlgili Dosyalar</h6>
                                 <div class="row">
@@ -320,84 +338,11 @@ require_once __DIR__ . '/includes/header.php';
                                             <i class="icon icon-download"></i>
                                         </a>
                                     </div>
-                                    <div class="col-sm-6">
-                                        <a href="#" target="_blank" class="attachments-item">
-                                            <div class="box-icon w-60">
-                                                <img src="images/home/file-2.png" alt="file">
-                                            </div>
-                                            <span>Villa-Document.pdf</span>
-                                            <i class="icon icon-download"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div>
-                            <!-- İlan Dosyalar -->
-
-                            <!-- İlan Yakınları -->
-                            <div class="single-property-element single-property-nearby">
-                                <h5 class="title fw-6">Yakında Neler Var </h5>
-                                <p>Yakındaki olanakları keşfederek ilanın yerini tam olarak belirleyin ve çevredeki imkanları tespit edin; böylece yaşam ortamı ve ilanın bulunduğu yerin, sunduğu olanaklar hakkında kapsamlı bir genel bakış elde edebilirsiniz.</p>
-                                <div class="row box-nearby">
-                                    <div class="col-md-5">
-                                        <ul class="box-left">
-                                            <li class="item-nearby">
-                                                <span class="label">School:</span>
-                                                <span class="fw-7">0.7 km</span>
-                                            </li>
-                                            <li class="item-nearby">
-                                                <span class="label">University:</span>
-                                                <span class="fw-7">1.3 km</span>
-                                            </li>
-                                            <li class="item-nearby">
-                                                <span class="label">Grocery center:</span>
-                                                <span class="fw-7">0.6 km</span>
-                                            </li>
-                                            <li class="item-nearby">
-                                                <span class="label">Market:</span>
-                                                <span class="fw-7">1.1 km</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-                                    <div class="col-md-5">
-                                        <ul class="box-right">
-                                            <li class="item-nearby">
-                                                <span class="label">Hospital:</span>
-                                                <span class="fw-7">0.4 km</span>
-                                            </li>
-                                            <li class="item-nearby">
-                                                <span class="label">Metro station:</span>
-                                                <span class="fw-7">1.8 km</span>
-                                            </li>
-                                            <li class="item-nearby">
-                                                <span class="label">Gym, wellness:</span>
-                                                <span class="fw-7">1.3 km</span>
-                                            </li>
-                                            <li class="item-nearby">
-                                                <span class="label">River:</span>
-                                                <span class="fw-7">2.1 km</span>
-                                            </li>
-                                        </ul>
-                                    </div>
-
-
-                                </div>
-
-                            </div>
-                            <!-- İlan Yakınları -->
-
-                             
-                            <?php if(!empty($ilan['harita_konumu'])): ?>
-                            <div class="single-property-element single-property-map">
-                                <h6 class="title fw-6">Konum</h6>
-                                <div class="map-box">
-                                    <iframe class="map"
-                                    src="<?php echo $ilan['harita_konumu']; ?>"
-                                    height="478" style="border:0;" allowfullscreen="" loading="lazy"
-                                    referrerpolicy="no-referrer-when-downgrade"></iframe> 
-                                     
                                 </div>
                             </div>
                             <?php endif; ?>
+                            <!-- İlan Dosyaları -->
+
                         </div>
                         <!-- İlan Danışmanı -->
                         <div class="col-xl-4 col-lg-5">
@@ -469,5 +414,38 @@ require_once __DIR__ . '/includes/header.php';
                     </div>
                 </div>
             </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const toggleBtn = document.getElementById('toggleDesc');
+            const descContainer = document.getElementById('descContainer');
+            
+            if (toggleBtn && descContainer) {
+                // Sadece metin çok uzunsa göster (Opsiyonel ama iyi olur)
+                const checkHeight = () => {
+                    if (descContainer.scrollHeight <= 120) {
+                        toggleBtn.style.display = 'none';
+                    } else {
+                        toggleBtn.style.display = 'inline-flex';
+                    }
+                };
+                checkHeight();
+
+                toggleBtn.addEventListener('click', function(e) {
+                    e.preventDefault();
+                    const isExpanded = descContainer.classList.toggle('expanded');
+                    const btnText = toggleBtn.querySelector('.text');
+                    
+                    if (isExpanded) {
+                        btnText.textContent = 'Daha Az';
+                    } else {
+                        btnText.textContent = 'Daha Fazlası';
+                        // Yukarıya kaydır
+                        descContainer.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }
+                });
+            }
+        });
+    </script>
 
 <?php require_once __DIR__ . '/includes/footer.php'; ?>
