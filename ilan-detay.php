@@ -91,15 +91,23 @@ require_once __DIR__ . '/includes/header.php';
                             <div class="box-left"> 
                                 <div class="info-box">
                                     <div class="label">Adres</div>
-                                    <div class="location">
-                                        <i class="fa-solid fa-location-dot"></i>
-                                        <?php echo htmlspecialchars($ilan['ilce'] . ', ' . $ilan['il'] . ', Türkiye'); ?>
-                                        <a href="#map-section">Haritada Gör</a>
-                                </div>
+                                    <p class="meta-item">
+                                        <span class="icon icon-mapPin"></span>
+                                        <span class="text-variant-1"><?php echo htmlspecialchars($ilan['ilce'] . ', ' . $ilan['il'] . ', Türkiye'); ?>k</span>
+                                         
+                                    </p>
                                 </div>
                             </div>
 
-                             
+                            <ul class="icon-box">
+                                <li><a href="#" class="item">
+                                        Haritada Gör
+
+                                    </a></li>
+                                 
+                                 
+
+                            </ul>
 
                         </div>
                     </div>
